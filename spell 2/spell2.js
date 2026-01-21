@@ -3,6 +3,15 @@ async function init() {
   const canvasTag = document.createElement('canvas');
   canvasTag.id = "renderCanvas"; // Important! This tells which CSS style to use
   document.body.appendChild(canvasTag);
+  // Modify the canvas size
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  const width = window.innerWidth * devicePixelRatio;
+  const height = window.innerHeight * devicePixelRatio;
+  canvasTag.width = width;
+  canvasTag.height = height; 
+  // Modify the canvas using CSS
+  canvasTag.style.width = `${window.innerWidth}px`;
+  canvasTag.style.height = `${window.innerHeight}px`;
   // Check if the browser supports WebGPU
   if (!navigator.gpu) {
     throw Error("WebGPU is not supported in this browser.");
@@ -49,6 +58,30 @@ async function init() {
     label: "Shader",
     code: vertCode + '\n' + fragCode,
   });
+  // Create a triangle geometry in CPU
+  var vertices = new Float32Array([
+    // x, y
+    0, 0.5,
+    -0.5, 0,
+    0.5,  0,
+  ]);
+    // Create vertex buffer to store the vertices in GPU
+  var vertexBuffer = device.createBuffer({
+    label: "Vertices",
+    size: vertices.byteLength,
+    usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST,
+  });
+  // Define vertex buffer layout - how the shader should read the buffer
+  var vertexBufferLayout = {
+    arrayStride: 2 * Float32Array.BYTES_PER_ELEMENT,
+    attributes: [{
+      format: "float32x2", // 32 bits, each has two coordinates
+      offset: 0,
+      shaderLocation: 0, // position in the vertex shader
+    }],
+  };
+  // Copy from CPU to GPU
+  device.queue.writeBuffer(vertexBuffer, 0, vertices);
   // Use the module to create a render pipeline
   var renderPipeline = device.createRenderPipeline({
     label: "Render Pipeline",
@@ -66,6 +99,10 @@ async function init() {
       }]
     }
   }); 
+  // add more render pass to draw the plane
+  pass.setPipeline(renderPipeline);      // which render pipeline to use
+  pass.setVertexBuffer(0, vertexBuffer); // which vertex buffer is used at location 0
+  pass.draw(vertices.length / 2);        // how many vertices to draw
   pass.end(); // end the pass
   // Create the command buffer using the encoder
   const commandBuffer = encoder.finish();
