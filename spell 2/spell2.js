@@ -67,10 +67,11 @@ async function init() {
   });
   // Create a triangle geometry in CPU
   var vertices = new Float32Array([
-    // x, y, r, g, b, a - added four values for rgba color
-    0, 0.5, 1, 0, 0, 1,
-    -0.5, 0, 0, 1, 0, 1,
-    0.5,  0, 0, 0, 1, 1,
+    // x, y
+    0, 0.5,
+    -0.5, 0,
+    0.5,  0,
+    0, 0.5, // line strip draw a loop, so set the last vertex the same as the first
   ]);
     // Create vertex buffer to store the vertices in GPU
   var vertexBuffer = device.createBuffer({
@@ -80,18 +81,12 @@ async function init() {
   });
   // Define vertex buffer layout - how the shader should read the buffer
   var vertexBufferLayout = {
-    arrayStride: 6 * Float32Array.BYTES_PER_ELEMENT,
+    arrayStride: 2 * Float32Array.BYTES_PER_ELEMENT,
     attributes: [{ 
       // position 0 has two floats
       shaderLocation: 0,   // position in the vertex shader
       format: "float32x2", // two coordinates
       offset: 0,           // no offset in the vertex buffer
-    },
-    {
-      // position 1 has four floats
-      shaderLocation: 1,   // position in the vertex shader
-      format: "float32x4", // four color values
-      offset: 2 * Float32Array.BYTES_PER_ELEMENT, // always after (x, y)
     }],
   };
   // Copy from CPU to GPU
