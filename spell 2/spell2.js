@@ -33,6 +33,39 @@ async function init() {
       storeOp: "store",
     }]
   });
+   // Vertex shader code
+  var vertCode = `
+  @vertex // this compute the scene coordinate of each input vertex
+  fn vertexMain(@location(0) pos: vec2f) -> @builtin(position) vec4f {
+    return vec4f(pos, 0, 1); // (pos, Z, W) = (X, Y, Z, W)
+  }`;
+  // Fragment shader code
+  var fragCode = `
+  @fragment // this compute the color of each pixel
+  fn fragmentMain() -> @location(0) vec4f {
+    return vec4f(238.f/255, 118.f/255, 35.f/255, 1); // (R, G, B, A)
+  }`;
+  var shaderModule = device.createShaderModule({
+    label: "Shader",
+    code: vertCode + '\n' + fragCode,
+  });
+  // Use the module to create a render pipeline
+  var renderPipeline = device.createRenderPipeline({
+    label: "Render Pipeline",
+    layout: "auto", // we will talk about layout later
+    vertex: {
+      module: shaderModule,         // the shader module
+      entryPoint: "vertexMain",     // where the vertex shader starts
+      buffers: [vertexBufferLayout] // the buffer layout - more about it soon
+    },
+    fragment: {
+      module: shaderModule,         // the shader module
+      entryPoint: "fragmentMain",   // where the fragment shader starts
+      targets: [{
+        format: canvasFormat        // the target canvas format (the output)
+      }]
+    }
+  }); 
   pass.end(); // end the pass
   // Create the command buffer using the encoder
   const commandBuffer = encoder.finish();
@@ -51,3 +84,4 @@ init().then( ret => {
   // also remove the created canvas tag
   document.getElementById("renderCanvas").remove();
 });
+
