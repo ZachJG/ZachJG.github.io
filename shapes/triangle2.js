@@ -9,7 +9,7 @@ export default class Triangle2 extends Standard2DVertexObject {
             0.5,  0,
             0, 0.5
         ]);
-        super(device, canvasFormat, vertices, '/lib/Shaders/standard2d.wgsl', 'line-strip');
+        super(device, canvasFormat, vertices, 'shaders/standard2d.wgsl', 'line-strip');
         this._vertices = vertices;
     }
 }
