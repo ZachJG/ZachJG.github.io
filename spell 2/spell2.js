@@ -1,6 +1,6 @@
-import Renderer from "../classes/renderer2d";
-import Triangle1 from "../shapes/triangle1";
-import Triangle2 from "../shapes/triangle2";
+import Renderer from "../classes/renderer2d.js";
+import Triangle1 from "../shapes/triangle1.js";
+import Triangle2 from "../shapes/triangle2.js";
 
 async function init() {
   // Create a canvas tag
