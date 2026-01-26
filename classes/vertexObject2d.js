@@ -1,4 +1,4 @@
-import SceneObject from "./sceneObject";
+import SceneObject from "./sceneObject.js";
 
 export default class Standard2DVertexObject extends SceneObject {
     constructor(device, canvasFormat, vertices, shaderFile, topology) {
