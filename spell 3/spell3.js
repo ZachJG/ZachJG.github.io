@@ -31,3 +31,21 @@ setInterval(() => {
     pose[0] = newrotor[0];
     pose[1] = newrotor[1];
 }, 100); // call every 100 ms
+
+var pose = new Float32Array([
+    1, 0,     // rotor
+    0, 0,     // translator
+    1, 1,     // scale
+    0, 0.5    // r_center
+]);
+
+// ...
+await renderer.appendSceneObject(new Standard2DGAPosedVertexObject(renderer._device, renderer._canvasFormat, vertices, pose, "../shaders/gaposer.wgsl", "triangle-list"));
+
+var pose = new Float32Array([
+    1, 0, 0, 0,  // motor
+    1, 1         // scale
+]);
+
+await renderer.appendSceneObject(new Standard2DGAPosedVertexObject(renderer._device, renderer._canvasFormat, vertices, pose, "../shaders/pga.wgsl", "triangle-list"));
+
