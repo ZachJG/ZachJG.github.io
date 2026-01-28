@@ -5,4 +5,4 @@ let shaderCode = await this.loadShader("../shaders/fullScreenTexture.wgsl");
 
 await renderer.appendSceneObject(new Standard2DFullScreenObject(renderer._device, renderer._canvasFormat, "../assets/boatgoesbinted.jpg"));
 
- await renderer.appendFilterObject(new ImageFilterObject(renderer._device, renderer._canvasFormat, "../shaders/dummyShader.wgsl"));
+await renderer.appendFilterObject(new ImageFilterObject(renderer._device, renderer._canvasFormat, "../shaders/8bit.wgsl"));
