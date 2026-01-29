@@ -2,7 +2,7 @@ import SceneObject from "./sceneObject.js";
 
 export default class Standard2DFullScreenObject extends SceneObject {
    constructor(device, canvasFormat, img) {
-     super(device, canvasFormat, "<we will create this shader file>");
+     super(device, canvasFormat, "../shaders/fullScreenTexture.wgsl");
      this._img = new Image();
      this._img.src = img;
    }

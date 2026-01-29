@@ -12,7 +12,10 @@ async function init() {
   const renderer = new Renderer(canvasTag);
   await renderer.init();
 
-  
+  let shaderCode = await this.loadShader("../shaders/fullscreenTexture.wgsl");
+
+  await renderer.appendSceneObject(new Standard2DFullScreenObject(renderer._device, renderer._canvasFormat, "../assets/boatgoesbinted.jpg"));
+
 
   // Render
   renderer.render();
