@@ -77,7 +77,7 @@ export default class Renderer {
             obj?.compute(computePass);
         }
         for (const obj of this._filters) {
-            obj?.compute(computPass)
+            obj?.compute(computePass)
         }
         computePass.end(); // end the pass
         // Create the command buffer
