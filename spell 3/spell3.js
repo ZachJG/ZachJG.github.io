@@ -1,6 +1,5 @@
 import Renderer from "../classes/renderer2d.js";
 import Standard2DFullScreenObject from "../classes/standard2dFullScreenObject.js";
-import ImageFilterObject from "../classes/imageFilterObject.js";
 
 async function init() {
   // Create a canvas tag
@@ -13,7 +12,7 @@ async function init() {
   await renderer.init();
 
   await renderer.appendSceneObject(new Standard2DFullScreenObject(renderer._device, renderer._canvasFormat, "../assets/boatgoesbinted.jpg"));
-  await renderer.appendFilterObject(new ImageFilterObject(renderer._device, renderer._canvasFormat, "../shaders/8bit.wgsl"));
+
 
 
   // Render
