@@ -76,7 +76,7 @@ export default class Renderer {
         for (const obj of this._objects) {
             obj?.compute(computePass);
         }
-        for (const obj of this_._filters) {
+        for (const obj of this._filters) {
             obj?.compute(computPass)
         }
         computePass.end(); // end the pass
