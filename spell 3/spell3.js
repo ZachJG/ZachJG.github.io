@@ -25,7 +25,7 @@ async function init() {
 
   var pose = [1, 0, 0, 0, 1, 1]; // rotor, translator, scales
   pose = new Float32Array(pose);
-  await renderer.appendSceneObject(new Standard2DGAPosedVertexObject(renderer._device, renderer._canvasFormat, vertices, pose, "<your GA Pose Shader file>", "triangle-list"));
+  await renderer.appendSceneObject(new Standard2DGAPosedVertexObject(renderer._device, renderer._canvasFormat, vertices, pose, "../shaders/gaposer.wgsl", "triangle-list"));
   let angle = Math.PI / 100 / 2;
   let dr = [Math.cos(angle), -Math.sin(angle)]; // a delta rotor
 
