@@ -3,7 +3,6 @@ export default class Renderer {
         this._canvas = canvas;
         this._objects = [];
         this._clearColor = { r: 0, g: 56/255, b: 101/255, a: 1 }; // Blue
-        this._filters = [];
     }
     async init() {
         // Check if it supports WebGPU
@@ -43,10 +42,6 @@ export default class Renderer {
         await obj.init();
         this._objects.push(obj);
     }
-    async appendFilterObject(obj) {
-        await obj.init();
-        this._filters.push(obj)
-    }
     renderToSelectedView(outputView) {
         // update cpu geometry if needed
         for (const obj of this._objects) {
@@ -67,17 +62,11 @@ export default class Renderer {
         for (const obj of this._objects) {
             obj?.render(pass);
         }
-        for (const obj of this._filters) {
-            obj?.render(pass);
-        }
         pass.end(); // end the pass
         const computePass = encoder.beginComputePass();
         // add compute pass to compute
         for (const obj of this._objects) {
             obj?.compute(computePass);
-        }
-        for (const obj of this._filters) {
-            obj?.compute(computePass)
         }
         computePass.end(); // end the pass
         // Create the command buffer
