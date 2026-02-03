@@ -1,4 +1,4 @@
-import Standard2DVertexObject from "./vertexObject2d";
+import Standard2DVertexObject from "./vertexObject2d.js";
 
 export default class Standard2DGAPosedVertexObject extends Standard2DVertexObject {
     constructor(device, canvasFormat, vertices, pose, shaderFile, topology) {
