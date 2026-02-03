@@ -5,7 +5,6 @@ export default class Standard2DGAPosedVertexObject extends Standard2DVertexObjec
         super(device, canvasFormat, vertices, shaderFile, topology);
         this._pose = pose;
     }
-
     // More methods to implement
     async createGeometry() {
         // Call parent's to create vertex geometry
