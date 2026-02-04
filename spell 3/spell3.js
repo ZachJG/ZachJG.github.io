@@ -3,6 +3,10 @@ import Standard2DFullScreenObject from "../classes/standard2dFullScreenObject.js
 import ImageNosifyFilterObject from "../classes/imageNosify.js";
 import Standard2DGAPosedVertexObject from "../classes/standard2dPose.js"
 
+function LinearInterpolate(A, B, t) {
+  return A * (1 - t) + B * t;
+}
+
 async function init() {
   let geometricProduct = (a, b) => {
     // ref: https://geometricalgebratutorial.com/pga/
@@ -44,34 +48,32 @@ async function init() {
   await renderer.appendSceneObject(new Standard2DFullScreenObject(renderer._device, renderer._canvasFormat, "../assets/boatgoesbinted.jpg"));
   await renderer.appendFilterObject(new ImageNosifyFilterObject(renderer._device, renderer._canvasFormat, "../shaders/nosify.wgsl"));
 
-  let vertices = new Float32Array([
-    // x, y
-    0, 0.5,
-    -0.5, 0,
-    0.5,  0,
-    0, 0.5
+  // Create a triangle geometry
+  var vertices = new Float32Array([
+    // x, y,
+    0, 0.25, 
+    -0.25, 0,
+    0.25,  0,
   ]);
-  var pose = new Float32Array([
-   1, 0, 0, 0,  // motor
-   1, 1         // scale
- ]);
+  let pose0 = [0, -0.75];
+  let pose1 = [0, 0.5];
+  var pose = new Float32Array([1, 0, pose0[0], pose0[1], 1, 1, 0.25, 0.25]);
   await renderer.appendSceneObject(new Standard2DGAPosedVertexObject(renderer._device, renderer._canvasFormat, vertices, pose, "../shaders/pga.wgsl", "triangle-list"));
-  let angle = Math.PI / 100;
-  // rotate about center
-  let center = [0, 0];
-  let dr = normalizeMotor([Math.cos(angle / 2), -Math.sin(angle / 2), -center[0] * Math.sin(angle / 2), -center[1] * Math.sin(angle / 2)]);
-  let dt = normalizeMotor([1, 0, 0.01 / 2, 0 / 2]);
-  let dm = normalizeMotor(geometricProduct(dt, dr));
-  // Render
-  setInterval(() => { 
+  let timerMs = 100;
+  let steps = 100;      // how many samples for a full move
+  let i = 0;
+  let dir = 1;
+
+  setInterval(() => {
+    let t = i / steps;  // 0..1
     renderer.render();
-    // update pose
-    let newmotor = normalizeMotor(geometricProduct(dm, [pose[0], pose[1], pose[2], pose[3]]));
-    pose[0] = newmotor[0];
-    pose[1] = newmotor[1];
-    pose[2] = newmotor[2];
-    pose[3] = newmotor[3];
-  }, 100); // call every 100 ms
+    // LERP translation
+    pose[2] = LinearInterpolate(pose0[0], pose1[0], t);
+    pose[3] = LinearInterpolate(pose0[1], pose1[1], t);
+    i += dir;
+    if (i >= steps) dir = -1;
+    if (i <= 0) dir = 1;
+  }, timerMs);
   return renderer;
 }
 
