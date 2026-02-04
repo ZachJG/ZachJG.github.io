@@ -62,11 +62,6 @@ async function init() {
   let pose0 = [0, -0.75];
   let pose1 = [0, 0.5];
   var pose = new Float32Array([1, 0, pose0[0], pose0[1], 1, 1, 0.25, 0.25]);
-  let tNew = easeInEaseOut(t);
-  pose[0] = LinearInterpolate(pose0[0], pose1[0], tNew);
-  pose[1] = LinearInterpolate(pose0[1], pose1[1], tNew);
-  pose[2] = LinearInterpolate(pose0[2], pose1[2], tNew);
-  pose[3] = LinearInterpolate(pose0[3], pose1[3], tNew);
   await renderer.appendSceneObject(new Standard2DGAPosedVertexObject(renderer._device, renderer._canvasFormat, vertices, pose, "../shaders/pga.wgsl", "triangle-list"));
   let timerMs = 100;
   let steps = 100;      // how many samples for a full move
@@ -74,11 +69,12 @@ async function init() {
   let dir = 1;
 
   setInterval(() => {
-    let t = i / steps;  // 0..1
+    let tNew = easeInEaseOut(t);
     renderer.render();
-    // LERP translation
-    pose[2] = LinearInterpolate(pose0[0], pose1[0], t);
-    pose[3] = LinearInterpolate(pose0[1], pose1[1], t);
+    pose[0] = LinearInterpolate(pose0[0], pose1[0], tNew);
+    pose[1] = LinearInterpolate(pose0[1], pose1[1], tNew);
+    pose[2] = LinearInterpolate(pose0[2], pose1[2], tNew);
+    pose[3] = LinearInterpolate(pose0[3], pose1[3], tNew);
     i += dir;
     if (i >= steps) dir = -1;
     if (i <= 0) dir = 1;
