@@ -41,11 +41,3 @@ init().then( ret => {
   document.body.appendChild(pTag);
   document.getElementById("renderCanvas").remove();
 });
-
-setInterval(() => { 
-  renderer.render();
-  // update pose
-  let newrotor = applyRotorToRotor(dr, [pose[0], pose[1]]);
-  pose[0] = newrotor[0];
-  pose[1] = newrotor[1];
-}, 100); // call every 100 ms
