@@ -10,6 +10,7 @@ let applyRotorToRotor = (dr, r) => {
   return [dr[0] * r[0] - dr[1] * r[1], dr[0] * r[1] + dr[1] * r[0]];
 };
 
+const canvasTag = document.createElement('canvas');
 const renderer = new FilteredRenderer(canvasTag);
 var pose = [1, 0, 0, 0, 1, 1]; // rotor, translator, scales
 pose = new Float32Array(pose);
@@ -18,7 +19,6 @@ let dr = [Math.cos(angle), -Math.sin(angle)]; // a delta rotor
 
 async function init() {
   // Create a canvas tag
-  const canvasTag = document.createElement('canvas');
   canvasTag.id = "renderCanvas";
   document.body.appendChild(canvasTag);
 
