@@ -24,7 +24,7 @@ async function init() {
   await renderer.appendFilterObject(new ImageNosifyFilterObject(renderer._device, renderer._canvasFormat, "../shaders/nosify.wgsl"));
 
   var pose = [1, 0, 0, 0, 1, 1]; // rotor, translator, scales
-  pose = new Float32Array(pose);
+  let vertices = new Float32Array(pose);
   await renderer.appendSceneObject(new Standard2DGAPosedVertexObject(renderer._device, renderer._canvasFormat, vertices, pose, "../shaders/gaposer.wgsl", "triangle-list"));
   let angle = Math.PI / 100 / 2;
   let dr = [Math.cos(angle), -Math.sin(angle)]; // a delta rotor
