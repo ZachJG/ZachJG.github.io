@@ -69,8 +69,9 @@ async function init() {
   let dir = 1;
 
   setInterval(() => {
-    let tNew = easeInEaseOut(t);
+    let t = i / steps;  // 0..1
     renderer.render();
+    let tNew = easeInEaseOut(t);
     pose[0] = LinearInterpolate(pose0[0], pose1[0], tNew);
     pose[1] = LinearInterpolate(pose0[1], pose1[1], tNew);
     pose[2] = LinearInterpolate(pose0[2], pose1[2], tNew);
