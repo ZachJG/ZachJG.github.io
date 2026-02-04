@@ -10,26 +10,24 @@ let applyRotorToRotor = (dr, r) => {
   return [dr[0] * r[0] - dr[1] * r[1], dr[0] * r[1] + dr[1] * r[0]];
 };
 
-const canvasTag = document.createElement('canvas');
-const renderer = new FilteredRenderer(canvasTag);
-var pose = [1, 0, 0, 0, 1, 1]; // rotor, translator, scales
-pose = new Float32Array(pose);
-let angle = Math.PI / 100 / 2;
-let dr = [Math.cos(angle), -Math.sin(angle)]; // a delta rotor
-
 async function init() {
   // Create a canvas tag
+  const canvasTag = document.createElement('canvas');
   canvasTag.id = "renderCanvas";
   document.body.appendChild(canvasTag);
 
   // Create a simple renderer
+  const renderer = new FilteredRenderer(canvasTag);
   await renderer.init();
 
   await renderer.appendSceneObject(new Standard2DFullScreenObject(renderer._device, renderer._canvasFormat, "../assets/boatgoesbinted.jpg"));
   await renderer.appendFilterObject(new ImageNosifyFilterObject(renderer._device, renderer._canvasFormat, "../shaders/nosify.wgsl"));
 
+  var pose = [1, 0, 0, 0, 1, 1]; // rotor, translator, scales
+  pose = new Float32Array(pose);
   await renderer.appendSceneObject(new Standard2DGAPosedVertexObject(renderer._device, renderer._canvasFormat, vertices, pose, "../shaders/gaposer.wgsl", "triangle-list"));
-
+  let angle = Math.PI / 100 / 2;
+  let dr = [Math.cos(angle), -Math.sin(angle)]; // a delta rotor
   // Render
   renderer.render();
   return renderer;
