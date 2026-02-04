@@ -1,13 +1,9 @@
-// A 2D GA pose stored in a uniform buffer.
-//
-// Pose layout in memory (Float32Array):
-//   rotor:      2 floats  (cos, -sin)
-//   translator: 2 floats  (tx, ty)
-//   scale:      2 floats  (sx, sy)
-struct Pose {
+// struct to store 2D GA pose
+    struct Pose {
     rotor: vec2f,
     translator: vec2f,
-    scale: vec2f
+    scale: vec2f,
+    r_center: vec2f // added a rotation center
 };
 
 @group(0) @binding(0) var<uniform> pose: Pose;
@@ -49,7 +45,7 @@ fn applyRotorToPoint(p: vec2f, r: vec2f) -> vec2f{
 @vertex // this compute the scene coordinate of each input vertex
 fn vertexMain(@location(0) pos: vec2f) -> @builtin(position) vec4f {
     // Apply rotor
-    let rotated = applyRotorToPoint(pos, pose.rotor);
+    let rotated = applyRotorToPoint(pos - pose.r_center, pose.rotor) + pose.r_center;
     // Apply translator
     let transformed = rotated + pose.translator;
     // Apply scale
