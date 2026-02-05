@@ -69,9 +69,12 @@ async function init() {
   /*let pose0 = [0, -0.75];
   let pose1 = [0, 0.5];
   var pose = new Float32Array([1, 0, pose0[0], pose0[1], 1, 1, 0.25, 0.25]);*/
-  let pose0 = [1, 0];   // cos(0), -sin(0)
+  /*let pose0 = [1, 0];   // cos(0), -sin(0)
   let pose1 = [0, -1];  // cos(pi/2), -sin(pi/2)
-  var pose = new Float32Array([pose0[0], pose0[1], 0, 0, 1, 1, 0.25, 0.25]);
+  var pose = new Float32Array([pose0[0], pose0[1], 0, 0, 1, 1, 0.25, 0.25]);*/
+  let pose0 = normalizeMotor([1, 0, -0.2, -0.25]);
+  let pose1 = normalizeMotor([0, 1, -0.25, 0.4]);
+  var pose = new Float32Array([pose0[0], pose0[1], pose0[2], pose0[3], 1, 1]);
   await renderer.appendSceneObject(new Standard2DGAPosedVertexObject(renderer._device, renderer._canvasFormat, vertices, pose, "../shaders/pga.wgsl", "triangle-list"));
   let timerMs = 100;
   let steps = 100;      // how many samples for a full move
@@ -85,13 +88,24 @@ async function init() {
     let t = i / steps;
     renderer.render();
 
-    // LERP translation
     /*pose[2] = LinearInterpolate(pose0[0], pose1[0], t);
     pose[3] = LinearInterpolate(pose0[1], pose1[1], t);*/
 
-    let angle = LinearInterpolate(sAngle, eAngle, t);
+    /*let angle = LinearInterpolate(sAngle, eAngle, t);
     pose[0] = Math.cos(angle);
-    pose[1] = -Math.sin(angle);
+    pose[1] = -Math.sin(angle);*/
+
+    let m = [
+      LinearInterpolate(pose0[0], pose1[0], t),
+      LinearInterpolate(pose0[1], pose1[1], t),
+      LinearInterpolate(pose0[2], pose1[2], t),
+      LinearInterpolate(pose0[3], pose1[3], t),
+    ];
+    m = normalizeMotor(m);
+    pose[0] = m[0];
+    pose[1] = m[1];
+    pose[2] = m[2];
+    pose[3] = m[3];
 
     i += dir;
     if (i >= steps) dir = -1;
