@@ -106,6 +106,11 @@ async function init() {
     pose[1] = m[1];
     pose[2] = m[2];
     pose[3] = m[3];
+    let tNew = easeInEaseOut(t);
+    pose[0] = LinearInterpolate(pose0[0], pose1[0], tNew);
+    pose[1] = LinearInterpolate(pose0[1], pose1[1], tNew);
+    pose[2] = LinearInterpolate(pose0[2], pose1[2], tNew);
+    pose[3] = LinearInterpolate(pose0[3], pose1[3], tNew);
 
     i += dir;
     if (i >= steps) dir = -1;
