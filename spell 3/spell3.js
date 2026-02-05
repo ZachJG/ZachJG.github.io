@@ -79,19 +79,9 @@ async function init() {
     let t = i / steps;
     renderer.render();
 
-    // LERP motor coefficients
-    let m = [
-      LinearInterpolate(pose0[0], pose1[0], t),
-      LinearInterpolate(pose0[1], pose1[1], t),
-      LinearInterpolate(pose0[2], pose1[2], t),
-      LinearInterpolate(pose0[3], pose1[3], t),
-    ];
-    m = normalizeMotor(m);
-
-    pose[0] = m[0];
-    pose[1] = m[1];
-    pose[2] = m[2];
-    pose[3] = m[3];
+    // LERP translation
+    pose[2] = LinearInterpolate(pose0[0], pose1[0], t);
+    pose[3] = LinearInterpolate(pose0[1], pose1[1], t);
 
     i += dir;
     if (i >= steps) dir = -1;
