@@ -95,7 +95,7 @@ async function init() {
     pose[0] = Math.cos(angle);
     pose[1] = -Math.sin(angle);*/
 
-    let m = [
+    /*let m = [
       LinearInterpolate(pose0[0], pose1[0], t),
       LinearInterpolate(pose0[1], pose1[1], t),
       LinearInterpolate(pose0[2], pose1[2], t),
@@ -105,7 +105,7 @@ async function init() {
     pose[0] = m[0];
     pose[1] = m[1];
     pose[2] = m[2];
-    pose[3] = m[3];
+    pose[3] = m[3];*/
     let tNew = easeInEaseOut(t);
     pose[0] = LinearInterpolate(pose0[0], pose1[0], tNew);
     pose[1] = LinearInterpolate(pose0[1], pose1[1], tNew);
