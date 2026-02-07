@@ -1,6 +1,7 @@
 import FilteredRenderer from "../classes/filteredRenderer.js";
 import Camera from "../classes/camera.js";
 import Camera2DVertexObject from "../classes/cameraVertexObject.js";
+import Triangle1 from "../shapes/triangle1.js";
 
 async function init() {
     // Create a canvas tag
@@ -11,6 +12,8 @@ async function init() {
     // Create a simple renderer
     const renderer = new FilteredRenderer(canvasTag);
     await renderer.init();
+
+    await renderer.appendSceneObject(new Triangle1(renderer._device, renderer._canvasFormat));
 
     let camera = new Camera();
     let triangle = new Camera2DVertexObject(renderer._device, renderer._canvasFormat, camera._pose, new Float32Array([0, 0.5, -0.5, 0, 0.5, 0]), "<your new shader file>");

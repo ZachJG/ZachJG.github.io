@@ -15,6 +15,11 @@ async function init() {
     let p4 = 1;
     return Math.pow(1 - t, 3) * p1 + 3 * Math.pow(1 - t, 2) * t * p2 + 3 * (1 - t) * Math.pow(t, 2) * p3 + Math.pow(t, 3) * p4;
   }
+  let parametricEase = (t, alpha) => {
+    let a = Math.pow(t, alpha);
+    let b = Math.pow(1 - t, alpha);
+    return a / (a + b);
+  };
   let geometricProduct = (a, b) => {
     // ref: https://geometricalgebratutorial.com/pga/
     // eoo = 0, e00 = 1 e11 = 1
@@ -106,7 +111,7 @@ async function init() {
     pose[1] = m[1];
     pose[2] = m[2];
     pose[3] = m[3];*/
-    let tNew = easeInEaseOut(t);
+    let tNew = parametricEase(t,3);
     pose[0] = LinearInterpolate(pose0[0], pose1[0], tNew);
     pose[1] = LinearInterpolate(pose0[1], pose1[1], tNew);
     pose[2] = LinearInterpolate(pose0[2], pose1[2], tNew);
