@@ -36,40 +36,40 @@ async function init() {
         }
         requestAnimationFrame(renderFrame);
     };
+    var movespeed = 0.05;
+    window.addEventListener("keydown", (e) => {
+        switch (e.key) {
+            case 'ArrowUp': case 'w': case 'W':
+                camera.moveUp(movespeed);
+                triangle.updateCameraPose();
+                break;
+            case 'ArrowDown': case 's': case 'S':   
+                camera.moveDown(movespeed);
+                triangle.updateCameraPose();     
+                break;
+            case 'ArrowLeft': case 'a': case 'A':  
+                camera.moveLeft(movespeed);
+                triangle.updateCameraPose();
+                break;
+            case 'ArrowRight': case 'd': case 'D': 
+                camera.moveRight(movespeed);
+                triangle.updateCameraPose();       
+                break;
+            case 'q': case 'Q':  
+                camera.zoomIn();
+                triangle.updateCameraPose();       
+                break;
+            case 'e': case 'E':
+                camera.zoomOut();
+                triangle.updateCameraPose();  
+                break;
+        }
+    });
     lastCalled = Date.now();
     renderFrame();
     setInterval(() => { 
         console.log(frameCnt);
         frameCnt = 0;
-        var movespeed = 0.05;
-        window.addEventListener("keydown", (e) => {
-            switch (e.key) {
-                case 'ArrowUp': case 'w': case 'W':
-                    camera.moveUp(movespeed);
-                    triangle.updateCameraPose();
-                    break;
-                case 'ArrowDown': case 's': case 'S':   
-                    camera.moveDown(movespeed);
-                    triangle.updateCameraPose();     
-                    break;
-                case 'ArrowLeft': case 'a': case 'A':  
-                    camera.moveLeft(movespeed);
-                    triangle.updateCameraPose();
-                    break;
-                case 'ArrowRight': case 'd': case 'D': 
-                    camera.moveRight(movespeed);
-                    triangle.updateCameraPose();       
-                    break;
-                case 'q': case 'Q':  
-                    camera.zoomIn();
-                    triangle.updateCameraPose();       
-                    break;
-                case 'e': case 'E':
-                    camera.zoomOut();
-                    triangle.updateCameraPose();  
-                    break;
-            }
-    });
     }, 1000); // call every 1000 ms
     return renderer;
 }
