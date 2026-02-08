@@ -4,6 +4,9 @@ export default class Camera {
     constructor() {
         this._pose = new Float32Array([1, 0, 0, 0, 1, 1]);
     }
+    updatePose(newpose){
+        this._pose = newpose
+    }
     moveLeft(d) {
         let dt = PGA2D.createTranslator(-d, 0);
         let newpose = PGA2D.normalizeMotor(PGA2D.geometricProduct(dt, [this._pose[0], this._pose[1], this._pose[2], this._pose[3]]));
@@ -34,7 +37,7 @@ export default class Camera {
     }
 
     zoomOut() {
-    this._pose[4] /= 1.1;
-    this._pose[5] /= 1.1;
+        this._pose[4] /= 1.1;
+        this._pose[5] /= 1.1;
     }
 }
