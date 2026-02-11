@@ -1,4 +1,4 @@
-import Renderer from "../classes/renderer2d.js";
+import FilteredRender from "../classes/filteredRenderer.js"
 
 async function init() {
     // Create a canvas tag
@@ -7,7 +7,7 @@ async function init() {
     document.body.appendChild(canvasTag);
 
     // Create a simple renderer
-    const renderer = new Renderer(canvasTag);
+    const renderer = new FilteredRender(canvasTag);
     await renderer.init();
 
     return renderer;
