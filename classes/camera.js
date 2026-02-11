@@ -5,7 +5,9 @@ export default class Camera {
         this._pose = new Float32Array([1, 0, 0, 0, 1, 1]);
     }
     updatePose(newpose){
-        this._pose = newpose
+        for (let i = 0; i < 4; ++i) {
+            this._pose[i] = newpose[i];
+        }
     }
     moveLeft(d) {
         let dt = PGA2D.createTranslator(-d, 0);
