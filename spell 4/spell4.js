@@ -3,6 +3,12 @@ import Standard2DFullScreenObject from "../classes/standard2dFullScreenObject.js
 import Camera from "../classes/camera.js";
 import Camera2DVertexObject from "../classes/cameraVertexObject.js";
 
+function mouseToNDC(e) {
+    const x = (e.clientX / window.innerWidth) * 2 - 1;
+    const y = (-e.clientY / window.innerHeight) * 2 + 1;
+    return [x, y];
+}
+
 async function init() {
     // Create a canvas tag
     const canvasTag = document.createElement('canvas');
@@ -61,6 +67,41 @@ async function init() {
                 triangle.updateCameraPose();  
                 break;
         }
+    });
+    let dragging = false;            // are we currently dragging?
+    let prevP = { x: 0, y: 0 };
+    canvasTag.addEventListener('mousemove', (e) => {
+        // tracking/update logic
+        if (!dragging) return;
+        const ndc = mouseToNDC(e);
+        const dx = ndc[0] - prevP.x;
+        const dy = ndc[1] - prevP.y;
+        prevP.x = ndc[0];
+        prevP.y = ndc[1];
+        // Note: we apply the opposite direction to make the mouse movement align with the object
+        if (dx > 0) camera.moveRight(-dx);
+        else camera.moveLeft(dx);
+        if (dy > 0) camera.moveUp(-dy);
+        else camera.moveDown(dy);
+        triangle.updateCameraPose();
+        renderer.render();
+    });
+    canvasTag.addEventListener('mousedown', (e) => {
+        dragging = true;
+        // init tracking/update logic
+        // 1) mouse -> scene
+        const ndc = mouseToNDC(e);
+        // 2) store previous location
+        prevP.x = ndc[0];
+        prevP.y = ndc[1];
+    });
+
+    canvasTag.addEventListener('mouseup', (e) => {
+        dragging = false;
+    });
+
+    canvasTag.addEventListener('mouseleave', (e) => {
+        dragging = false;
     });
     lastCalled = Date.now();
     renderFrame();
