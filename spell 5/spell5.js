@@ -1,4 +1,5 @@
 import FilteredRender from "../classes/filteredRenderer.js"
+import StandardTextObject from "../classes/textObject.js";
 
 async function init() {
     // Create a canvas tag
@@ -9,6 +10,9 @@ async function init() {
     // Create a simple renderer
     const renderer = new FilteredRender(canvasTag);
     await renderer.init();
+
+    let fps = '??';
+    var fpsText = new StandardTextObject('fps: ' + fps);
 
     return renderer;
 }
