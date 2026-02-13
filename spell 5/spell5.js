@@ -22,7 +22,7 @@ async function init() {
       -0.5, 0.5, 
       -0.5, -0.5 // loop back to the first vertex
     ]);
-    var quad = new Camera2DVertexObject(renderer._device, renderer._canvasFormat, camera._pose, vertices, "<your shader file>", "line-strip");
+    var quad = new Camera2DVertexObject(renderer._device, renderer._canvasFormat, camera._pose, vertices, "../shaders/camera2.wgsl", "line-strip", 10 * 10); // draw 10*10 instances
     await renderer.appendSceneObject(quad);
 
     let fps = '??';
