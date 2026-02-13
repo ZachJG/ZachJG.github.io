@@ -76,6 +76,7 @@ async function init() {
         const ndc = mouseToNDC(e);
         const dx = ndc[0] - prevP.x;
         const dy = ndc[1] - prevP.y;
+        let diff = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
         if (diff > 0.001) { // a dirty flag spell
             prevP.x = ndc[0];
             prevP.y = ndc[1];
