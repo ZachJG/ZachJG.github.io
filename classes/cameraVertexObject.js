@@ -82,6 +82,13 @@ export default class Camera2DVertexObject extends SceneObject {
         pass.setBindGroup(0, this._bindGroup);       // bind the uniform buffer
         pass.draw(this._vertices.length / 2);        // number of vertices to draw
     }
+    render(pass) {
+        // add to render pass to draw the object
+        pass.setPipeline(this._renderPipeline);
+        pass.setVertexBuffer(0, this._vertexBuffer);
+        pass.setBindGroup(0, this._bindGroup);
+        pass.draw(this._vertices.length / 2, this._numInstances);  // draw can takes a 2nd parameter, which tells the shader how many instances to draw!
+    }
     async createComputePipeline() {}
     compute(pass) {}
 }
