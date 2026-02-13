@@ -36,7 +36,6 @@ async function init() {
     renderFrame();
     setInterval(() => { 
       fpsText.updateText('fps: ' + frameCnt);
-      console.log(frameCnt);
       frameCnt = 0;
     }, 1000); // call every 1000 ms
     return renderer;
