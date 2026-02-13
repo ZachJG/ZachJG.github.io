@@ -18,9 +18,12 @@ async function init() {
         case 'f': case 'F': fpsText.toggleVisibility(); break;
       }
     });
-    var frameCnt = window.frames.length % 60
-    fpsText.updateText('fps: ' + frameCnt);
-
+    var frameCnt = 0    
+    setInterval(() => { 
+      fpsText.updateText('fps: ' + frameCnt);
+      console.log(frameCnt);
+      frameCnt = 0;
+    }, 1000); // call every 1000 ms
     return renderer;
 }
 
