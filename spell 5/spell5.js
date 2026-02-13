@@ -13,6 +13,12 @@ async function init() {
 
     let fps = '??';
     var fpsText = new StandardTextObject('fps: ' + fps);
+    window.addEventListener("keydown", (e) => {
+      switch (e.key) {
+        case 'f': case 'F': fpsText.toggleVisibility(); break;
+      }
+    });
+    fpsText.updateText('fps: ' + frameCnt);
 
     return renderer;
 }
