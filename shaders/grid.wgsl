@@ -34,9 +34,9 @@ fn vertexMain(@location(0) pos: vec2f, @builtin(instance_index) idx: u32) -> Ver
   let cell = pos / 10; // divide the input quad into 10x10 pieces
   let offset = - halfLength + uv * cellLength + cellLength / 10 * 0.5; // compute the offset for the instance
   // Apply motor
-  let transformed = applyMotorToPoint(cell + offset, reverse(pose.motor));
+  let transformed = applyMotorToPoint(cell + offset, reverse(pos.motor));
   // Apply scale
-  let scaled = transformed * pose.scale;
+  let scaled = transformed * pos.scale;
   var out: VertexOutput;
   out.pos = vec4f(scaled, 0, 1);
   out.cellStatus = f32(cellStatusIn[idx]);
