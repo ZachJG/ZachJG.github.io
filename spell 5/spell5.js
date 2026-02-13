@@ -32,6 +32,8 @@ async function init() {
       }
       requestAnimationFrame(renderFrame);
     };
+    lastCalled = Date.now();
+    renderFrame();
     setInterval(() => { 
       fpsText.updateText('fps: ' + frameCnt);
       console.log(frameCnt);
