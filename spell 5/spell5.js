@@ -18,7 +18,7 @@ async function init() {
         case 'f': case 'F': fpsText.toggleVisibility(); break;
       }
     });
-    fpsText.updateText('fps: ' + (console.timeLog % 60));
+    fpsText.updateText('fps: ' + frameCnt);
 
     return renderer;
 }
