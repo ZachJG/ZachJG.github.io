@@ -1,6 +1,7 @@
 import Camera2DVertexObject from "./cameraVertexObject.js"
 
 export default class Grid extends Camera2DVertexObject {
+    constructor(device, canvasFormat, cameraPose, vertices, shaderFile, topology, numInstances) {}
     async createGeometry() {
         super.createGeometry();
         // an array of cell statuses in CPU
