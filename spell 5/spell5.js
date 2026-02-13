@@ -1,5 +1,7 @@
 import FilteredRender from "../classes/filteredRenderer.js"
 import StandardTextObject from "../classes/textObject.js";
+import Camera from "../classes/camera.js";
+import Camera2DVertexObject from "../classes/cameraVertexObject.js";
 
 async function init() {
     // Create a canvas tag
@@ -10,6 +12,18 @@ async function init() {
     // Create a simple renderer
     const renderer = new FilteredRender(canvasTag);
     await renderer.init();
+
+    let camera = new Camera();
+    var vertices = new Float32Array([
+      // x, y
+      -0.5, -0.5,
+      0.5, -0.5,
+      0.5,  0.5,
+      -0.5, 0.5, 
+      -0.5, -0.5 // loop back to the first vertex
+    ]);
+    var quad = new Camera2DVertexObject(renderer._device, renderer._canvasFormat, camera._pose, vertices, "<your shader file>", "line-strip");
+    await renderer.appendSceneObject(quad);
 
     let fps = '??';
     var fpsText = new StandardTextObject('fps: ' + fps);
