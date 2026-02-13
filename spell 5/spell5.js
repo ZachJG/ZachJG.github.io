@@ -18,6 +18,7 @@ async function init() {
         case 'f': case 'F': fpsText.toggleVisibility(); break;
       }
     });
+    var frameCnt = window.frames.length % 60
     fpsText.updateText('fps: ' + frameCnt);
 
     return renderer;
