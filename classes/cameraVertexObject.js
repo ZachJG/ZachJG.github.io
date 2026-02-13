@@ -7,6 +7,13 @@ export default class Camera2DVertexObject extends SceneObject {
         this._vertices = vertices;
         this._topology = topology;
     }
+    constructor(device, canvasFormat, cameraPose, vertices, shaderFile, topology, numInstances) {
+        super(device, canvasFormat, shaderFile);
+        this._cameraPose = cameraPose;
+        this._vertices = vertices;
+        this._topology = topology;
+        this._numInstances = numInstances; // store how many instances we want to draw
+    }
     async createGeometry() {
         // Create vertex buffer to store the vertices in GPU
         this._vertexBuffer = this._device.createBuffer({
