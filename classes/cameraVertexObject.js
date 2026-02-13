@@ -1,12 +1,12 @@
 import SceneObject from "./sceneObject.js";
 
 export default class Camera2DVertexObject extends SceneObject {
-    constructor(device, canvasFormat, cameraPose, vertices, shaderFile, topology) {
+    /*constructor(device, canvasFormat, cameraPose, vertices, shaderFile, topology) {
         super(device, canvasFormat, shaderFile);
         this._cameraPose = cameraPose; // store the camera pose
         this._vertices = vertices;
         this._topology = topology;
-    }
+    }*/
     constructor(device, canvasFormat, cameraPose, vertices, shaderFile, topology, numInstances) {
         super(device, canvasFormat, shaderFile);
         this._cameraPose = cameraPose;
@@ -75,13 +75,13 @@ export default class Camera2DVertexObject extends SceneObject {
     updateCameraPose() {
         this._device.queue.writeBuffer(this._cameraPoseBuffer, 0, this._cameraPose);
     }
-    render(pass) {
+    /*render(pass) {
         // add to render pass to draw the object
         pass.setPipeline(this._renderPipeline);      // which render pipeline to use
         pass.setVertexBuffer(0, this._vertexBuffer); // how the buffer are binded
         pass.setBindGroup(0, this._bindGroup);       // bind the uniform buffer
         pass.draw(this._vertices.length / 2);        // number of vertices to draw
-    }
+    }*/
     render(pass) {
         // add to render pass to draw the object
         pass.setPipeline(this._renderPipeline);
