@@ -2,6 +2,7 @@ import FilteredRender from "../classes/filteredRenderer.js"
 import StandardTextObject from "../classes/textObject.js";
 import Camera from "../classes/camera.js";
 import Grid from "../classes/grid.js";
+import PGA2D from "../classes/pga2d.js";
 
 async function init() {
     // Create a canvas tag
