@@ -1,7 +1,6 @@
 import FilteredRender from "../classes/filteredRenderer.js"
 import StandardTextObject from "../classes/textObject.js";
 import Camera from "../classes/camera.js";
-import Camera2DVertexObject from "../classes/cameraVertexObject.js";
 import Grid from "../classes/grid.js";
 
 async function init() {
@@ -49,6 +48,25 @@ async function init() {
     };
     lastCalled = Date.now();
     renderFrame();
+    canvasTag.addEventListener('mousemove', (e) => {
+      var mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+      var mouseY = (-e.clientY / window.innerHeight) * 2 + 1;
+      mouseX /= camera._pose[4];
+      mouseY /= camera._pose[5];
+      let p = PGA2D.applyMotorToPoint([mouseX, mouseY], [camera._pose[0], camera._pose[1], camera._pose[2], camera._pose[3]]);
+      let halfLength = 1; // half length
+      let cellLength = halfLength * 2; // full length
+      let u = Math.floor((p[0] + halfLength) / cellLength * 10);
+      let v = Math.floor((p[1] + halfLength) / cellLength * 10);
+      if (u >= 0 && u < 10 && v >= 0 && v < 10) {
+        let offsetX = - halfLength + u / 10 * cellLength + cellLength / 10 * 0.5;
+        let offsetY = - halfLength + v / 10 * cellLength + cellLength / 10 * 0.5;
+        if (-0.5 / 10 + offsetX <= p[0] && p[0] <= 0.5 / 10 + offsetX && -0.5 / 10 + offsetY <= p[1] && p[1] <= 0.5 / 10 + offsetY) {
+          console.log(`in cell (${u}, ${v})`);
+        }
+      }
+      console.log(`Closest offset is (${u}, ${v})`);
+    });
     setInterval(() => { 
       fpsText.updateText('fps: ' + frameCnt);
       frameCnt = 0;
