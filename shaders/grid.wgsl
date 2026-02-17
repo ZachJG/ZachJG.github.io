@@ -121,11 +121,3 @@ fn fragmentMain(@location(0) cellStatus: f32) -> @location(0) vec4f {
   return vec4f(238.f/255, 118.f/255, 35.f/255, 1) * cellStatus; // (R, G, B, A)
   // cellStatus is either 1 or 0, so it will be either orange or black
 }
-
-let u = idx % 10; // we are expecting 10x10, so modulo 10 to get the x index
-let v = idx / 10; // divide by 10 to get the y index
-let uv = vec2f(f32(u), f32(v)) / 10; // normalize the coordinates to [0, 1]
-let halfLength = 1.f; // half length
-let cellLength = halfLength * 2.f; // full length
-let cell = pos / 10; // divide the input quad into 10x10 pieces
-let offset = - halfLength + uv * cellLength + cellLength / 10 * 0.5; // compute the offset for the instance
