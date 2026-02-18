@@ -1,17 +1,25 @@
 // TODO 3: Define a struct to store a particle
 struct Particle {
-  
+  position: vec3f,
+  velocity: vec3f,
 }
 
 // TODO 4: Write the bind group spells here using array<Particle>
 // name the binded variables particlesIn and particlesOut
 
+@group(0) @binding(0) var<storage> particlesIn: array<Particle>;
+@group(0) @binding(1) var<storage, read_write> particlesOut: array<Particle>;
 
 @vertex
 fn vertexMain(@builtin(instance_index) idx: u32, @builtin(vertex_index) vIdx: u32) -> @builtin(position) vec4f {
   // TODO 5: Revise the vertex shader to draw circle to visualize the particles
-  
-  return vec4f(0, 0, 0, 1);
+  let particle = particlesIn[idx].p;
+  let size = 0.0125;
+  let pi = 3.14159265;
+  let theta = 2. * pi / 8. * f32(vIdx);
+  let x = cos(theta) * size;
+  let y = sin(theta) * size;
+  return vec4f(vec2f(x + particle.x, y + particle.y), 0, 1);
 }
 
 @fragment
