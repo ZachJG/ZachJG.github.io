@@ -1,4 +1,4 @@
-import FilteredRender from "../classes/filteredRenderer.js"
+import FilteredRender from "../classes/filteredRenderer.js";
 import StandardTextObject from "../classes/textObject.js";
 import Camera from "../classes/camera.js";
 import Grid from "../classes/grid.js";
