@@ -16,18 +16,7 @@ export default class ParticleSystemObject extends SceneObject {
     this._particles = new Float32Array(this._numParticles * 6); // [x, y, ix, iy, vx, vy]
     // TODO 1 - create ping-pong buffers to store and update the particles in GPU
     // name the ping-pong buffers _particleBuffers
-    this._particleBuffers = [
-      this._device.createBuffer({
-        label: "Particle Status Buffer 1" + this.getName(),
-        size: this._particles.byteLength,
-        usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST,
-      }),
-      this._device.createBuffer({
-        label: "Particle Status Buffer 1" + this.getName(),
-        size: this._particles.byteLength,
-        usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST,
-      })
-    ];
+    
     
     
     
