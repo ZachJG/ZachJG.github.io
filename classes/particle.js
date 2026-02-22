@@ -95,7 +95,6 @@ export default class ParticleSystemObject extends SceneObject {
     // Create bind group to bind the particle buffers
     this._bindGroups = [
       this._device.createBindGroup({
-        label: "Particle Bind Group 1" + this.getName(),
         layout: this._particlePipeline.getBindGroupLayout(0),
         entries: [
           {
@@ -109,7 +108,6 @@ export default class ParticleSystemObject extends SceneObject {
         ],
       }),
       this._device.createBindGroup({
-        label: "Particle Bind Group 2" + this.getName(),
         layout: this._particlePipeline.getBindGroupLayout(0),
         entries: [
           {
