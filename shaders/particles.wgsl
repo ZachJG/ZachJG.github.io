@@ -7,9 +7,6 @@ struct Particle {
 // TODO 4: Write the bind group spells here using array<Particle>
 // name the binded variables particlesIn and particlesOut
 
-@group(0) @binding(0) var<storage> particlesIn: array<Particle>;
-@group(0) @binding(1) var<storage, read_write> particlesOut: array<Particle>;
-
 @vertex
 fn vertexMain(@builtin(instance_index) idx: u32, @builtin(vertex_index) vIdx: u32) -> @builtin(position) vec4f {
   // TODO 5: Revise the vertex shader to draw circle to visualize the particles
