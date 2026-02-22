@@ -23,9 +23,9 @@
 
 // TODO 3: Define a struct to store a particle
 struct Particle {
-  position: vec2f
-  initial_position: vec2f
-  velocity: vec2f
+  p: position
+  ip: initial_position
+  v: velocity
 }
 
 // TODO 4: Write the bind group spells here using array<Particle>
