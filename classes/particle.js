@@ -17,6 +17,18 @@ export default class ParticleSystemObject extends SceneObject {
     // TODO 1 - create ping-pong buffers to store and update the particles in GPU
     // name the ping-pong buffers _particleBuffers
     
+    this._particleBuffers = [
+      this._device.createBuffer({
+        label: "Particle status Buffer 1 " + this.getName(),
+        size: this._particles.byteLength,
+        usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST,
+      }),
+      this._device.createBuffer({
+        label: "Particle status Buffer 2 " + this.getName(),
+        size: this._particles.byteLength,
+        usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST,
+      })
+    ];
     
     
     
@@ -48,7 +60,18 @@ export default class ParticleSystemObject extends SceneObject {
     // TODO 2 - Create the bind group layout for using the ping-pong buffers in the GPU
     // name the bind group layout _bindGroupLayout
     
-    
+    this._bindGroupLayout = this._device.createBindGroupLayout({
+      label: "Particle Bind Group Layout " + this.getName(),
+      entries: [{
+        binding: 0,
+        visibility: GPUShaderStage.VERTEX | GPUShaderStage.COMPUTE,
+        buffer: { type: "read-only-storage"}
+      }, {
+        binding: 1,
+        visibility: GPUShaderStage.COMPUTE,
+        buffer: { type: "storage"}
+      }]
+    });
     
     
     // create the pipeline layout using the bind group layout
