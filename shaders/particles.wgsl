@@ -58,7 +58,7 @@ fn computeMain(@builtin(global_invocation_id) global_id: vec3u) {
   if (idx < arrayLength(&particlesIn)) {
     particlesOut[idx] = particlesIn[idx];
     // TODO 6: Revise the compute shader to update the particles using the velocity
-    particlesIn[idx].p = particlesIn[idx].ip + particlesIn[idx].v
+    particlesIn[idx].p = particlesIn[idx].ip + particlesIn[idx].v;
 
     
     
