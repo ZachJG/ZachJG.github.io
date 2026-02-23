@@ -45,8 +45,8 @@ export default class ParticleSystemObject extends SceneObject {
       this._particles[6 * i + 2] = this._particles[6 * i + 0];
       this._particles[6 * i + 3] = this._particles[6 * i + 1];
       // TODO 6: update the velocity
-      this._particles[6 * i + 4] = 0;
-      this._particles[6 * i + 5] = 0;
+      this._particles[6 * i + 4] = (Math.random() * 2 - 1);
+      this._particles[6 * i + 5] = (Math.random() * 2 - 1);
     }
     // Copy from CPU to GPU
     this._step = 0;
