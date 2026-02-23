@@ -32,7 +32,7 @@ struct Particle {
 // name the binded variables particlesIn and particlesOut
 
 @group(0) @binding(0) var<storage> particlesIn: array<Particle>;
-@group(0) @binding(0) var<storage, read_write> particlesOut: array<Particle>;
+@group(0) @binding(1) var<storage, read_write> particlesOut: array<Particle>;
 
 @vertex
 fn vertexMain(@builtin(instance_index) idx: u32, @builtin(vertex_index) vIdx: u32) -> @builtin(position) vec4f {
