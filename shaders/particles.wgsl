@@ -24,7 +24,7 @@
 // TODO 3: Define a struct to store a particle
 struct Particle {
   p: position
-  ip: initial_position
+  i: initial_position
   v: velocity
 }
 
