@@ -23,9 +23,9 @@
 
 // TODO 3: Define a struct to store a particle
 struct Particle {
-  var p = vec2f(10.0, 50.0);
-  var ip = vec2f(10.0, 50.0);
-  var v = vec2f(0.0,0.0);
+  p: vec2f,
+  ip: vec2f,
+  v: vec2f
 }
 
 // TODO 4: Write the bind group spells here using array<Particle>
