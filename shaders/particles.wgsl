@@ -58,8 +58,9 @@ fn computeMain(@builtin(global_invocation_id) global_id: vec3u) {
   if (idx < arrayLength(&particlesIn)) {
     particlesOut[idx] = particlesIn[idx];
     // TODO 6: Revise the compute shader to update the particles using the velocity
-    particlesIn[idx].p = particlesIn[idx].ip + particlesIn[idx].v;
-
+    let particleMove = particlesIn[idx].p;
+    particleMove.x = particlesIn[idx].ip.x + particlesIn[idx].v.x;
+    particleMove.y = particlesIn[idx].ip.y + particlesIn[idx].v.y;
     
     
     // TOOD 7: Add boundary checking and respawn the particle when it is offscreen
