@@ -38,6 +38,8 @@ export default class ParticleSystemObject extends SceneObject {
     
   resetParticles() {
     for (let i = 0; i < this._numParticles; ++i) {
+      var randY = Math.random()
+      var randX = Math.random()
       // random position between [-1, 1] x [-1, 1]
       this._particles[6 * i + 0] = (Math.random() * 2 - 1); // [-1, 1] 
       this._particles[6 * i + 1] = (Math.random() * 2 - 1);
@@ -45,8 +47,20 @@ export default class ParticleSystemObject extends SceneObject {
       this._particles[6 * i + 2] = this._particles[6 * i + 0];
       this._particles[6 * i + 3] = this._particles[6 * i + 1];
       // TODO 6: update the velocity
-      this._particles[6 * i + 4] = 0.5;
-      this._particles[6 * i + 5] = 0.5;
+      var speedY = 0
+      var speedX = 0
+      if (randY % 2 == 0) {
+        speedY = 1
+      } else {
+        speedY = -1
+      }
+      if (randX % 2 == 0) {
+        speedX = 1
+      } else {
+        speedX = -1
+      }
+      this._particles[6 * i + 4] = speedY;
+      this._particles[6 * i + 5] = speedX;
     }
     // Copy from CPU to GPU
     this._step = 0;
