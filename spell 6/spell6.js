@@ -34,6 +34,7 @@ async function init() {
       if (elapsed > frameInterval) {
         ++frameCnt;
         lastCalled = Date.now() - (elapsed % frameInterval);
+        particles.resetParticles();
         renderer.render();
       }
       requestAnimationFrame(renderFrame);
@@ -41,7 +42,6 @@ async function init() {
     lastCalled = Date.now();
     renderFrame();
     setInterval(() => {
-      particles.resetParticles();
       fpsText.updateText('fps: ' + frameCnt);
       frameCnt = 0;
     }, 1000); // call every 1000 ms
