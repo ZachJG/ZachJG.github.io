@@ -63,10 +63,10 @@ fn computeMain(@builtin(global_invocation_id) global_id: vec3u) {
     
     
     // TOOD 7: Add boundary checking and respawn the particle when it is offscreen
-    if (particlesOut[idx].p.x >= boundary.x or particlesOut[idx].p.x <= 0) {
+    if (particlesOut[idx].p.x >= boundary.x || particlesOut[idx].p.x <= 0) {
       particlesOut[idx].p.x = particlesIn[idx].ip.x;
     }
-    if (particlesOut[idx].p.y >= boundary.y or particlesOut[idx].p.y <= 0) {
+    if (particlesOut[idx].p.y >= boundary.y || particlesOut[idx].p.y <= 0) {
       particlesOut[idx].p.y = particlesIn[idx].ip.y;
     }
   }
