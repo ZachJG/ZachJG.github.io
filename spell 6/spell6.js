@@ -31,7 +31,7 @@ async function init() {
     var lastCalled;
     let renderFrame = () => {
       let elapsed = Date.now() - lastCalled;
-      particles.resetParticles();
+      //particles.resetParticles();
       if (elapsed > frameInterval) {
         ++frameCnt;
         lastCalled = Date.now() - (elapsed % frameInterval);
