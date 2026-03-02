@@ -25,8 +25,8 @@
 struct Particle {
   p: vec2f,
   ip: vec2f,
-  v: vec2f
-  ls: u32
+  v: vec2f,
+  ls: u32,
   r: vec4f
 }
 
@@ -64,7 +64,7 @@ fn computeMain(@builtin(global_invocation_id) global_id: vec3u) {
     particlesOut[idx].p.y = particlesIn[idx].ip.y + particlesIn[idx].v.y;
     particlesOut[idx].ls = particlesIn[idx].ls - 1;
     if (particlesOut[idx].ls <= 0) {
-      particlesOut[idx].r = particlesIn[idx].r * (partriclesIn[idx].ls/255)
+      particlesOut[idx].r = particlesIn[idx].r * (partriclesIn[idx].ls/255);
     }
     
     // TOOD 7: Add boundary checking and respawn the particle when it is offscreen
