@@ -5,6 +5,7 @@ export default class ParticleSystemObject extends SceneObject {
     super(device, canvasFormat, shaderFile);
     this._numParticles = numParticles;
     this._step = 0;
+    this._lifespan = 255;
   }
   
   async createGeometry() { 

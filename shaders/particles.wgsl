@@ -26,6 +26,7 @@ struct Particle {
   p: vec2f,
   ip: vec2f,
   v: vec2f
+  ls: u32
 }
 
 // TODO 4: Write the bind group spells here using array<Particle>
@@ -54,13 +55,13 @@ fn fragmentMain() -> @location(0) vec4f {
 @compute @workgroup_size(256)
 fn computeMain(@builtin(global_invocation_id) global_id: vec3u) {
   let idx = global_id.x;
-  
+
   if (idx < arrayLength(&particlesIn)) {
     particlesOut[idx] = particlesIn[idx];
     // TODO 6: Revise the compute shader to update the particles using the velocity
     particlesOut[idx].p.x = particlesIn[idx].ip.x + particlesIn[idx].v.x;
     particlesOut[idx].p.y = particlesIn[idx].ip.y + particlesIn[idx].v.y;
-    
+    particlesOut[idx].ls = particlesIn[idx].ls - 1;
     
     // TOOD 7: Add boundary checking and respawn the particle when it is offscreen
     if (particlesOut[idx].p.x >= 1 || particlesOut[idx].p.x <= -1) {
