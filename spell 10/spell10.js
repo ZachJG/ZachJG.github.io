@@ -1,5 +1,6 @@
 import Renderer from "../lib/Viz/2DRenderer.js";
 import Camera from "../lib/Viz/3DCamera.js";
+import StandardTextObject from "../classes/textObject.js"
 
 async function init() {
     // Create a canvas tag
@@ -12,7 +13,47 @@ async function init() {
     await renderer.init();
 
     let camera = new Camera();
-
+    var movespeed = 0.05
+    window.addEventListener("keydown", (e) => {
+      switch (e.key) {
+        case 'w':
+          camera.moveX(movespeed);
+          break;
+        case 's':
+          camera.moveX(-moveSpeed);
+          break;
+        case 'd':
+          camera.moveY(movespeed);
+          break;
+        case 'a':
+          camera.moveY(-movespeed);
+          break;
+        case 'e':
+          camera.moveZ(movespeed);
+          break;
+        case 'q':
+          camera.moveZ(-movespeed);
+          break;
+        case 'i':
+          camera.rotateX(movespeed);
+          break;
+        case 'k':
+          camera.rotateX(-moveSpeed);
+          break;
+        case 'l':
+          camera.rotateY(movespeed);
+          break;
+        case 'j':
+          camera.rotateY(-movespeed);
+          break;
+        case 'o':
+          camera.rotateZ(movespeed);
+          break;
+        case 'u':
+          camera.rotateZ(-movespeed);
+          break;
+      }
+    });
     /*
     // define a 3D point
     let p = [0, 0, 0]; 
