@@ -1,6 +1,5 @@
 import Renderer from "../lib/Viz/2DRenderer.js";
 import Camera from "../lib/Viz/3DCamera.js";
-import PGA3D from "../lib/Math/PGA3D.js";
 
 async function init() {
     // Create a canvas tag
