@@ -1,7 +1,6 @@
-import FilteredRender from "../classes/filteredRenderer.js";
-import Camera from "../classes/camera.js";
-import StandardTextObject from "../classes/textObject.js";
-import PGA3D from "../classes/pga3d.js";
+import Renderer from "../lib/Viz/2DRenderer.js";
+import Camera from "../lib/Viz/3DCamera.js";
+import PGA3D from "../lib/Math/PGA3D.js";
 
 async function init() {
     // Create a canvas tag
@@ -10,7 +9,7 @@ async function init() {
     document.body.appendChild(canvasTag);
 
     // Create a simple renderer
-    const renderer = new FilteredRender(canvasTag);
+    const renderer = new Renderer(canvasTag);
     await renderer.init();
 
     let camera = new Camera();
@@ -76,6 +75,7 @@ async function init() {
     // this should be the same
     console.log(g.map(val => val.toFixed(4)));*/
 
+    /*
     // let our starting point be (0, 1, 0) - (a point on a circle)
     let p = [0, 1, 0]; 
     // the starting pose, which is an identity
@@ -83,7 +83,7 @@ async function init() {
     // our starting x value - the input to the sine function
     let theta = 0; 
     // the input of the sine function is our x, so the delta changes is the dx
-    let dx = Math.PI / 100; 
+    let dx = Math.PI / 100;*/
 
     let fps = '??';
     var fpsText = new StandardTextObject('fps: ' + fps);
@@ -109,6 +109,7 @@ async function init() {
     lastCalled = Date.now();
     renderFrame();
     setInterval(() => {
+      /*
       // find the delta translator using the helix formula, we are using (t, cos(t), sin(t));
       let new_theta = theta + dx; // compute a new x
       let dy = Math.cos(new_theta) - Math.cos(theta); // compute dy by new y - old y
@@ -122,7 +123,7 @@ async function init() {
       // check the result, you should see x keeps increasing while y is moving up and down, forming a sine wave
       console.log(pga_result.map(val => val.toFixed(4))); 
       // update the current x
-      theta = new_theta; 
+      theta = new_theta;*/
       fpsText.updateText('fps: ' + frameCnt);
       frameCnt = 0;
     }, 100); // call every 1000 ms
