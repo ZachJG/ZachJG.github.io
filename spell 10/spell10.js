@@ -1,6 +1,7 @@
 import Renderer from "../lib/Viz/2DRenderer.js";
 import Camera from "../lib/Viz/3DCamera.js";
-import StandardTextObject from "../classes/textObject.js"
+import StandardTextObject from "../classes/textObject.js";
+import UnitCube from "../lib/DS/UnitCube.js";
 
 async function init() {
     // Create a canvas tag
@@ -13,6 +14,8 @@ async function init() {
     await renderer.init();
 
     let camera = new Camera();
+    let cube = new UnitCube();
+    await renderer.appendSceneObject(cube);
     var movespeed = 0.05
     window.addEventListener("keydown", (e) => {
       switch (e.key) {
