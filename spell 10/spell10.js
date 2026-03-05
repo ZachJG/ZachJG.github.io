@@ -14,7 +14,7 @@ async function init() {
     await renderer.init();
 
     let camera = new Camera();
-    let cube = new RayBoxObject(renderer._device,renderer._canvasFormat,camera._pose,"../lib/Shaders/tracebox.wgsl");
+    let cube = new RayBoxObject(renderer._device,renderer._canvasFormat,camera,"../lib/Shaders/tracebox.wgsl");
     await renderer.appendSceneObject(cube);
     var movespeed = 0.05
     window.addEventListener("keydown", (e) => {
