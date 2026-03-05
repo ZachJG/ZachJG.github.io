@@ -1,4 +1,4 @@
-import Renderer from "../lib/Viz/2DRenderer.js";
+import RayTracer from "../lib/Viz/RayTracer.js";
 import Camera from "../lib/Viz/3DCamera.js";
 import StandardTextObject from "../classes/textObject.js";
 import RayBoxObject from "../lib/Scene/RayBoxObject.js";
@@ -10,7 +10,7 @@ async function init() {
     document.body.appendChild(canvasTag);
 
     // Create a simple renderer
-    const renderer = new Renderer(canvasTag);
+    const renderer = new RayTracer(canvasTag);
     await renderer.init();
 
     let camera = new Camera();
