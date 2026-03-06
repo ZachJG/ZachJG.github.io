@@ -16,44 +16,56 @@ async function init() {
     let camera = new Camera();
     let cube = new RayBoxObject(renderer._device,renderer._canvasFormat,camera,"../lib/Shaders/tracebox.wgsl");
     await renderer.setTracerObject(cube);
-    var movespeed = 0.05
+    var movespeed = 0.5
     window.addEventListener("keydown", (e) => {
       switch (e.key) {
         case 'w':
           camera.moveX(movespeed);
+          cube.updateCameraPose();
           break;
         case 's':
-          camera.moveX(-moveSpeed);
+          camera.moveX(-movespeed);
+          cube.updateCameraPose();
           break;
         case 'd':
           camera.moveY(movespeed);
+          cube.updateCameraPose();
           break;
         case 'a':
           camera.moveY(-movespeed);
+          cube.updateCameraPose();
           break;
         case 'e':
           camera.moveZ(movespeed);
+          cube.updateCameraPose();
           break;
         case 'q':
           camera.moveZ(-movespeed);
+          cube.updateCameraPose();
           break;
         case 'i':
           camera.rotateX(movespeed);
+          cube.updateCameraPose();
           break;
         case 'k':
-          camera.rotateX(-moveSpeed);
+          camera.rotateX(-movespeed);
+          cube.updateCameraPose();
           break;
         case 'l':
           camera.rotateY(movespeed);
+          cube.updateCameraPose();
           break;
         case 'j':
           camera.rotateY(-movespeed);
+          cube.updateCameraPose();
           break;
         case 'o':
           camera.rotateZ(movespeed);
+          cube.updateCameraPose();
           break;
         case 'u':
           camera.rotateZ(-movespeed);
+          cube.updateCameraPose();
           break;
       }
     });
