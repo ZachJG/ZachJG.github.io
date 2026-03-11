@@ -1,4 +1,5 @@
 import Renderer from "../classes/renderer2d.js";
+import TriangleShape from "../shapes/triangleShape.js";
 
 async function init() {
   // Create a canvas tag
@@ -11,6 +12,14 @@ async function init() {
   await renderer.init();
 
   // Append objects
+  let vert = new new Float32Array([
+    // x, y
+     0, 0.5,
+    -0.5, 0,
+    0.5,  0
+  ]);
+  let triangle = new TriangleShape(renderer._device,renderer._canvasFormat,vert);
+  await renderer.appendSceneObject(triangle);
 
   // Render
   renderer.render();
