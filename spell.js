@@ -1,5 +1,6 @@
 import Renderer from "./classes/renderer2d.js";
 import SmallTriangle from "./shapes/smallTriangle.js";
+import Square from "./shapes/square.js";
 
 async function init() {
   // Create a canvas tag
@@ -13,6 +14,7 @@ async function init() {
 
   // Append objects
   await renderer.appendSceneObject(new SmallTriangle(renderer._device, renderer._canvasFormat));
+  await renderer.appendSceneObject(new Square(renderer._device, renderer._canvasFormat));
 
   // Render
   renderer.render();
