@@ -8,7 +8,7 @@ export default class SmallTriangle extends Standard2DVertexObject {
             -0.6, -0.8,
             -0.4,  -0.6
         ]);
-        super(device, canvasFormat, vertices, '../shaders/standard2d.wgsl', 'triangle-list');
+        super(device, canvasFormat, vertices, '../shaders/standard2d.wgsl', 'line-strip');
         this._vertices = vertices;
     }
 }

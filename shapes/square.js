@@ -9,7 +9,7 @@ export default class Square extends Standard2DVertexObject {
             0.5,  0.25,
             0.5, 0.5
         ]);
-        super(device, canvasFormat, vertices, '../shaders/standard2d.wgsl', 'triangle-list');
+        super(device, canvasFormat, vertices, '../shaders/standard2d.wgsl', 'line-strip');
         this._vertices = vertices;
     }
 }

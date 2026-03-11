@@ -9,7 +9,7 @@ export default class Pentagon extends Standard2DVertexObject {
             0.1,  0.0,
             0.05, 0.0
         ]);
-        super(device, canvasFormat, vertices, '../shaders/standard2d.wgsl', 'triangle-list');
+        super(device, canvasFormat, vertices, '../shaders/standard2d.wgsl', 'line-strip');
         this._vertices = vertices;
     }
 }
