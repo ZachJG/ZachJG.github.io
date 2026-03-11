@@ -1,6 +1,6 @@
 import Standard2DVertexObject from "../classes/vertexObject2d.js";
 
-export default class SmallTriangle extends Standard2DVertexObject {
+export default class Pentagon extends Standard2DVertexObject {
     constructor(device, canvasFormat) {
         let vertices = new Float32Array([
             // x, y
