@@ -20,17 +20,21 @@ async function init() {
   ]);
   let triangle = new TriangleShape(renderer._device,renderer._canvasFormat,vert);
   await renderer.appendSceneObject(triangle);
-  let vertS = new Float32Array([
+  let vertS1 = new Float32Array([
     // x, y
     0.25, 0.25,
     0, 0.25,
-    0.25,  0.25,
+    0.25,  0.25
+  ]);
+  let square1 = new TriangleShape(renderer._device,renderer._canvasFormat,vertS1);
+  await renderer.appendSceneObject(square1);
+  let verS2 = new Float32Array([
     0.5, 0.25,
     0.25, 0.25,
     0.5,  0.5
   ]);
-  let square = new TriangleShape(renderer._device,renderer._canvasFormat,vertS);
-  await renderer.appendSceneObject(square);
+  let square2 = new TriangleShape(renderer._device,renderer._canvasFormat,vertS2);
+  await renderer.appendSceneObject(square2);
 
 
   // Render
