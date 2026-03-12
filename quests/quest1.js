@@ -14,12 +14,24 @@ async function init() {
   // Append objects
   let vert = new Float32Array([
     // x, y
-     0, 0.5,
-    -0.5, 0,
-    0.5,  0
+    -0.9, -0.3,
+    -0.6, -0.9,
+    -0.3,  -0.9
   ]);
   let triangle = new TriangleShape(renderer._device,renderer._canvasFormat,vert);
   await renderer.appendSceneObject(triangle);
+  let vertS = new Float32Array([
+    // x, y
+    0.25, 0.25,
+    0, 0.25,
+    0.25,  0.25,
+    0.5, 0.25,
+    0.25, 0.25,
+    0.5,  0.5
+  ]);
+  let square = new TriangleShape(renderer._device,renderer._canvasFormat,vertS);
+  await renderer.appendSceneObject(square);
+
 
   // Render
   renderer.render();
