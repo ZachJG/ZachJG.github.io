@@ -23,7 +23,7 @@ async function init() {
   let vertS1 = new Float32Array([
     // x, y
     0.5, 0.5,
-    0.25, 0.25,
+    0.25, 0.5,
     0.5,  0.25
   ]);
   let square1 = new TriangleShape(renderer._device,renderer._canvasFormat,vertS1);
