@@ -22,7 +22,7 @@ async function init() {
   await renderer.appendSceneObject(triangle);
   let vertS1 = new Float32Array([
     // x, y
-    0.5, 0.5,
+    0.25, 0.5,
     0.25, 0.5,
     0.5,  0.25
   ]);
