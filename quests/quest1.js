@@ -22,9 +22,9 @@ async function init() {
   await renderer.appendSceneObject(triangle);
   let vertS1 = new Float32Array([
     // x, y
-    0.25, 0.25,
+    0.25, 0.5,
     0, 0.25,
-    0.25,  0.25
+    0.5,  0.25
   ]);
   let square1 = new TriangleShape(renderer._device,renderer._canvasFormat,vertS1);
   await renderer.appendSceneObject(square1);
