@@ -12,7 +12,7 @@ async function init() {
   await renderer.init();
 
   // Append objects
-  let vert = new new Float32Array([
+  let vert = new Float32Array([
     // x, y
      0, 0.5,
     -0.5, 0,
