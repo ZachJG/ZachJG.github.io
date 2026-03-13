@@ -3,12 +3,7 @@
         return vec4f(pos, 0, 1); // (pos, Z, W) = (X, Y, Z, W)
     }
 
-struct Uniforms {
-    color: vec4<f32>,
-};
-@group(0) @binding(0) var<uniform> u_color: Uniforms;
-
-@fragment
-fn fs_main() -> @location(0) vec4<f32> {
-    return u_color.color;
-}
+@fragment // this compute the color of each pixel
+    fn fragmentMain(@location(1) color: vec4f) -> @location(0) vec4f {
+        return vec4f(color[0]/255, color[1]/255, color[2]/255, color[3]); // (R, G, B, A)
+    }
