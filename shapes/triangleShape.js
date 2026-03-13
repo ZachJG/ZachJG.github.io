@@ -40,7 +40,7 @@ export default class TriangleShape extends Standard2DVertexObject {
                 // position 0 has two floats
                 shaderLocation: 1,   // position in the vertex shader
                 format: "float32x4", // two coordinates
-                offset: 1,           // no offset in the vertex buffer
+                offset: 0,           // no offset in the vertex buffer
             }],
         };
     }
@@ -58,7 +58,8 @@ export default class TriangleShape extends Standard2DVertexObject {
                 entryPoint: "fragmentMain",    // the shader function
                 buffers: [this._colorBufferLayout],
                 targets: [{
-                    format: this._canvasFormat   // the target canvas format
+                    format: this._canvasFormat,   // the target canvas format
+                    writeMask: GPUColorWrite.RED | GPUColorWrite.GREEN | GPUColorWrite.BLUE | GPUColorWrite.ALPHA
                 }]
             },
             primitive: {                     
