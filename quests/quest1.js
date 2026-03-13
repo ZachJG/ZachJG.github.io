@@ -24,7 +24,7 @@ async function init() {
     // x, y
     0.25, 0.5,
     0.25, 0.25,
-    0.5,  0.25
+    0.5,  0.5
   ]);
   let square1 = new TriangleShape(renderer._device,renderer._canvasFormat,vertS1);
   await renderer.appendSceneObject(square1);
