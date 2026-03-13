@@ -66,4 +66,13 @@ export default class TriangleShape extends Standard2DVertexObject {
             }
         }); 
     }
+    render(pass) {
+        // add to render pass to draw the object
+        pass.setPipeline(this._renderPipeline);      // which render pipeline to use
+        pass.setVertexBuffer(0, this._vertexBuffer); // how the buffer are binded
+        pass.setVertexBuffer(1,this._colorBuffer);
+        pass.draw(this._vertices.length / 2);        // number of vertices to draw
+    }
+    async createComputePipeline() {}
+    compute(pass) {}
 }
