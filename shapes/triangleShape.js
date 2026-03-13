@@ -40,7 +40,7 @@ export default class TriangleShape extends Standard2DVertexObject {
                 // position 0 has two floats
                 shaderLocation: 1,   // position in the vertex shader
                 format: "float32x4", // two coordinates
-                offset: 0,           // no offset in the vertex buffer
+                offset: 1,           // no offset in the vertex buffer
             }],
         };
     }
