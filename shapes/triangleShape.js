@@ -35,11 +35,11 @@ export default class TriangleShape extends Standard2DVertexObject {
         this._device.queue.writeBuffer(this._colorBuffer, 1, this._color);
         // Define vertex buffer layout - how the GPU should read the buffer
         this._colorBufferLayout = {
-            arrayStride: 2 * Float32Array.BYTES_PER_ELEMENT,
+            arrayStride: 4 * Float32Array.BYTES_PER_ELEMENT,
             attributes: [{ 
                 // position 0 has two floats
                 shaderLocation: 1,   // position in the vertex shader
-                format: "float32x2", // two coordinates
+                format: "float32x4", // two coordinates
                 offset: 0,           // no offset in the vertex buffer
             }],
         };
@@ -51,11 +51,12 @@ export default class TriangleShape extends Standard2DVertexObject {
             vertex: {
                 module: this._shaderModule,         // the shader code
                 entryPoint: "vertexMain",           // the shader function
-                buffers: [this._vertexBufferLayout,this._colorBufferLayout], // the binded buffer layout
+                buffers: [this._vertexBufferLayout], // the binded buffer layout
             },
             fragment: {
                 module: this._shaderModule,    // the shader code
                 entryPoint: "fragmentMain",    // the shader function
+                buffers: [this._colorBufferLayout],
                 targets: [{
                     format: this._canvasFormat,   // the target canvas format
                     ColorWriteMask: GPUColorWrite.RED | GPUColorWrite.GREEN | GPUColorWrite.BLUE | GPUColorWrite.ALPHA
@@ -64,13 +65,21 @@ export default class TriangleShape extends Standard2DVertexObject {
             primitive: {                     
                 topology: this._topology       // draw using the specified topology
             }
-        }); 
+        });
+        this._bindGroup = this._device.createBindGroup({
+            label: "Triangle Bind Group " + this.getName(),
+            layout: this._renderPipeline.getBindGroupLayout(0),
+            entries: [{
+                binding: 0,
+                resource: { buffer: this._color}
+            }],
+        });
     }
     render(pass) {
         // add to render pass to draw the object
         pass.setPipeline(this._renderPipeline);      // which render pipeline to use
         pass.setVertexBuffer(0, this._vertexBuffer); // how the buffer are binded
-        pass.setVertexBuffer(1,this._colorBuffer);
+        pass.setColorBuffer(1,this._colorBuffer);
         pass.draw(this._vertices.length / 2);        // number of vertices to draw
     }
     async createComputePipeline() {}
