@@ -73,10 +73,6 @@ export default class TriangleShape extends Standard2DVertexObject {
         pass.setVertexBuffer(0, this._vertexBuffer); // how the buffer are binded
         pass.setVertexBuffer(1,this._colorBuffer);
         pass.draw(this._vertices.length / 2);        // number of vertices to draw
-        pass.draw(this._color.RED);
-        pass.draw(this._color.GREEN);
-        pass.draw(this._color.BLUE);
-        pass.draw(this._color.ALPHA);
     }
     async createComputePipeline() {}
     compute(pass) {}
