@@ -25,6 +25,24 @@ export default class TriangleShape extends Standard2DVertexObject {
                 offset: 0,           // no offset in the vertex buffer
             }],
         };
+        // Create vertex buffer to store the vertices in GPU
+        this._colorBuffer = this._device.createBuffer({
+            label: "Colors " + this.getName(),
+            size: this._color.byteLength,
+            usage: GPUBufferUsage.COLOR | GPUBufferUsage.COPY_DST,
+        });
+        // Copy from CPU to GPU
+        this._device.queue.writeBuffer(this._colorBuffer, 0, this._color);
+        // Define vertex buffer layout - how the GPU should read the buffer
+        this._vertexBufferLayout = {
+            arrayStride: 4 * Float32Array.BYTES_PER_ELEMENT,
+            attributes: [{ 
+                // position 0 has two floats
+                shaderLocation: 0,   // position in the vertex shader
+                format: "float32x4", // two coordinates
+                offset: 0,           // no offset in the vertex buffer
+            }],
+        };
     }
     async createRenderPipeline() {
         this._renderPipeline = this._device.createRenderPipeline({
@@ -51,7 +69,7 @@ export default class TriangleShape extends Standard2DVertexObject {
             layout: this._renderPipeline.getBindGroupLayout(0),
             entries: [{
                 binding: 0,
-                resource: { buffer: this._color}
+                resource: { buffer: this._colorBuffer}
             }],
         });
     }
