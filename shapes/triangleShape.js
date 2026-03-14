@@ -28,7 +28,7 @@ export default class TriangleShape extends Standard2DVertexObject {
         // Create vertex buffer to store the vertices in GPU
         this._colorBuffer = this._device.createBuffer({
             label: "Color " + this.getName(),
-            size: this._vertices.byteLength,
+            size: this._color.byteLength,
             usage: GPUBufferUsage.Color | GPUBufferUsage.COPY_DST,
         });
         // Copy from CPU to GPU
