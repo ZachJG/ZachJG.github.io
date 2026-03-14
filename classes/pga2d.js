@@ -22,7 +22,7 @@
  */
  
 export default class PGA2D {
-  static geometricProduct(a, b) { 
+  static geometricProduct(a, b) {
     // Note, both points and motors are using scalar (1), exey, eoex, eoey
     // We don't need a full geometric product (all other coefficients are zeros)
     // ref: https://geometricalgebratutorial.com/pga/
