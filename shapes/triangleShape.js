@@ -32,7 +32,7 @@ export default class TriangleShape extends Standard2DVertexObject {
             usage: GPUBufferUsage.Color | GPUBufferUsage.COPY_DST,
         });
         // Copy from CPU to GPU
-        this._device.queue.writeBuffer(this._colorBuffer, 0, this._color);
+        this._device.queue.writeBuffer(this._colorBuffer, 1, this._color);
         // Define vertex buffer layout - how the GPU should read the buffer
         this._colorBufferLayout = {
             arrayStride: 4 * Float32Array.BYTES_PER_ELEMENT,
