@@ -51,12 +51,11 @@ export default class TriangleShape extends Standard2DVertexObject {
             vertex: {
                 module: this._shaderModule,         // the shader code
                 entryPoint: "vertexMain",           // the shader function
-                buffers: [this._vertexBufferLayout] // the binded buffer layout
+                buffers: [this._vertexBufferLayout,this._colorBufferLayout], // the binded buffer layout
             },
             fragment: {
                 module: this._shaderModule,    // the shader code
                 entryPoint: "fragmentMain",    // the shader function
-                buffers: [this._colorBufferLayout],
                 targets: [{
                     format: this._canvasFormat,   // the target canvas format
                     ColorWriteMask: GPUColorWrite.RED | GPUColorWrite.GREEN | GPUColorWrite.BLUE | GPUColorWrite.ALPHA
