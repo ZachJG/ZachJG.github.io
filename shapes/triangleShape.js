@@ -32,13 +32,13 @@ export default class TriangleShape extends Standard2DVertexObject {
             usage: GPUBufferUsage.COLOR | GPUBufferUsage.COPY_DST,
         });
         // Copy from CPU to GPU
-        this._device.queue.writeBuffer(this._colorBuffer, 0, this._color);
+        this._device.queue.writeBuffer(this._colorBuffer, 1, this._color);
         // Define vertex buffer layout - how the GPU should read the buffer
         this._colorBufferLayout = {
             arrayStride: 4 * Float32Array.BYTES_PER_ELEMENT,
             attributes: [{ 
                 // position 0 has two floats
-                shaderLocation: 0,   // position in the vertex shader
+                shaderLocation: 1,   // position in the vertex shader
                 format: "float32x4", // two coordinates
                 offset: 0,           // no offset in the vertex buffer
             }],
