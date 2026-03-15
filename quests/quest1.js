@@ -18,7 +18,10 @@ async function init() {
     -0.6, -0.9,
     -0.3,  -0.9
   ]);
-  let color = [255.0,0.0,0.0,1.0];
+  let color = new Float32Array([
+    255,0,
+    0,1
+  ]);
   let triangle = new TriangleShape(renderer._device,renderer._canvasFormat,vert,color);
   await renderer.appendSceneObject(triangle);
   let vertS1 = new Float32Array([
