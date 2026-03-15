@@ -56,6 +56,7 @@ export default class TriangleShape extends Standard2DVertexObject {
             fragment: {
                 module: this._shaderModule,    // the shader code
                 entryPoint: "fragmentMain",    // the shader function
+                buffers: [this._colorBufferLayout],
                 targets: [{
                     format: this._canvasFormat,   // the target canvas format
                 }]
