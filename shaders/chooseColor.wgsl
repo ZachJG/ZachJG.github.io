@@ -5,7 +5,7 @@
         return vec4f(pos, 0, 1); // (pos, Z, W) = (X, Y, Z, W)
     }
 
-@group(0) @binding(0) var color: vec4f;
+@group(0) @binding(0) var<storage> color: vec4f;
 
 @fragment // this compute the color of each pixel
     fn fragmentMain() -> @location(0) vec4f {
