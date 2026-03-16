@@ -3,8 +3,8 @@
 @group(0) @binding(0) var<storage,read> col: vec4f;
 
 struct VOut {
-    @builtin(position) vec4f pos;
-    @location(0) vec4f color;
+    @builtin(position) pos: vec4f;
+    @location(0) color: vec4f;
 }
 
 @vertex // this compute the scene coordinate of each input vertex
