@@ -1,17 +1,17 @@
 
 
-@group(0) @binding(0) var<storage,read> col: vec4f;
+@group(0) @binding(0) var<storage,read> color: vec4f;
 
 struct VOut {
     @builtin(position) pos: vec4f,
-    @location(0) color: vec4f
+    @location(0) clr: vec4f
 }
 
 @vertex // this compute the scene coordinate of each input vertex
 fn vertexMain(@location(0) pos: vec2f, @builtin(vertex_index) v_idx: u32) -> VOut {
     var out : VOut;
     out.pos = vec4f(pos, 0, 1); // (pos, Z, W) = (X, Y, Z, W)
-    out.color[v_idx] = col[v_idx];
+    out.clr[v_idx] = color[v_idx];
     return out;
 }
 
