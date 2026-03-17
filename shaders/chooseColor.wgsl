@@ -11,7 +11,7 @@ struct VOut {
 fn vertexMain(@location(0) pos: vec2f, @builtin(vertex_index) v_idx: u32) -> VOut {
     var out : VOut;
     out.pos = vec4f(pos, 0, 1); // (pos, Z, W) = (X, Y, Z, W)
-    out.color[v_idx] = col[v_idx];
+    out.color = col[v_idx];
     return out;
 }
 
@@ -20,6 +20,6 @@ fn makeColor(c : f32) -> f32 {
 }
 
 @fragment // this compute the color of each pixel
-fn fragmentMain(v: VOut) -> @location(0) vec4f<f32> {
-    return vec4f<f32>(makeColor(v.color[0]),makeColor(v.color[1]),makeColor(v.color[2]),v.color[3]); // (R, G, B, A)
+fn fragmentMain(v: VOut) -> @location(0) vec4f {
+    return vec4f(makeColor(v.color[0]),makeColor(v.color[1]),makeColor(v.color[2]),v.color[3]); // (R, G, B, A)
 }
