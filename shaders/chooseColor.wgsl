@@ -18,6 +18,6 @@ fn vertexMain(@location(0) pos: vec2f, @builtin(vertex_index) v_idx: u32) -> VOu
 
 
 @fragment // this compute the color of each pixel
-fn fragmentMain(v: VOut, @builtin(vertex_index) idx: u32) -> @location(0) vec4f {
-    return vec4f(v.color[idx]/255, v.color[idx]/255, v.color[idx]/255, v.color[idx]); // (R, G, B, A)
+fn fragmentMain(v: VOut) -> @location(0) vec4f {
+    return vec4f(v.color); // (R, G, B, A)
 }
