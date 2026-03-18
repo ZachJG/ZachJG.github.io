@@ -11,7 +11,7 @@ struct VOut {
 fn vertexMain(@location(0) pos: vec2f, @builtin(vertex_index) idx : f32) -> VOut {
     var out : VOut;
     out.pos = vec4f(pos, 0, 1); // (pos, Z, W) = (X, Y, Z, W)
-    out.color = col[idx];
+    out.color[idx] = col[idx];
     return out;
 }
 
