@@ -8,7 +8,7 @@ struct VOut {
 }
 
 @vertex // this compute the scene coordinate of each input vertex
-fn vertexMain(@location(0) pos: vec2f, @builtin(vertex_index) idx : f32) -> VOut {
+fn vertexMain(@location(0) pos: vec2f, @builtin(vertex_index) idx : u32) -> VOut {
     var out : VOut;
     out.pos = vec4f(pos, 0, 1); // (pos, Z, W) = (X, Y, Z, W)
     out.color[idx] = col[idx];
