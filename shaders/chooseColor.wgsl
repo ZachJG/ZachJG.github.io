@@ -8,10 +8,10 @@ struct VOut {
 }
 
 @vertex // this compute the scene coordinate of each input vertex
-fn vertexMain(@location(0) pos: vec2f) -> VOut {
+fn vertexMain(@location(0) pos: vec2f, @builtin(vertex_index) idx : f32) -> VOut {
     var out : VOut;
     out.pos = vec4f(pos, 0, 1); // (pos, Z, W) = (X, Y, Z, W)
-    out.color = col;
+    out.color = col[idx];
     return out;
 }
 
@@ -21,8 +21,8 @@ fn makeColor(c : f32) -> f32 {
 
 @fragment // this compute the color of each pixel
 fn fragmentMain(v: VOut) -> @location(0) vec4f {
-    let r = vec4f(makeColor(v.color[0]),makeColor(v.color[1]),makeColor(v.color[2]),v.color[3]);
-    let g = vec4f(makeColor(v.color[0]),makeColor(v.color[1]),makeColor(v.color[2]),v.color[3])
-    let b = vec4f(makeColor(v.color[0]),makeColor(v.color[1]),makeColor(v.color[2]),v.color[3])
+    let r = makeColor(v.color[0]);
+    let g = makeColor(v.color[1]);
+    let b = makeColor(v.color[2]);
     return vec4f(r,g,b,v.color[3]); // (R, G, B, A)
 }
