@@ -21,5 +21,8 @@ fn makeColor(c : f32) -> f32 {
 
 @fragment // this compute the color of each pixel
 fn fragmentMain(v: VOut) -> @location(0) vec4f {
-    return vec4f(makeColor(v.color[0]),makeColor(v.color[1]),makeColor(v.color[2]),v.color[3]); // (R, G, B, A)
+    let r = vec4f(makeColor(v.color[0]),makeColor(v.color[1]),makeColor(v.color[2]),v.color[3]);
+    let g = vec4f(makeColor(v.color[0]),makeColor(v.color[1]),makeColor(v.color[2]),v.color[3])
+    let b = vec4f(makeColor(v.color[0]),makeColor(v.color[1]),makeColor(v.color[2]),v.color[3])
+    return vec4f(r,g,b,v.color[3]); // (R, G, B, A)
 }
