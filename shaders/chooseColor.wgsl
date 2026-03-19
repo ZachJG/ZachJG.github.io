@@ -1,6 +1,6 @@
 
 
-@group(0) @binding(0) var<storage,read> col: vec4f;
+@group(0) @binding(0) var<uniform> col: vec4f;
 
 struct VOut {
     @builtin(position) pos: vec4f,
