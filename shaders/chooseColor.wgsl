@@ -25,6 +25,6 @@ fn fragmentMain(v: VOut) -> @location(0) vec4f {
     let r = makeColor(v.c[0]);
     let g = makeColor(v.c[1]);
     let b = makeColor(v.c[2]);
-    let a = v.c[3]
+    let a = v.c[3];
     return vec4f(r,g,b,a); // (R, G, B, A)
 }
