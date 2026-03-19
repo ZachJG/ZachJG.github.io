@@ -1,6 +1,6 @@
 
 
-@group(0) @binding(0) var<uniform> col: vec4f;
+@group(0) @binding(0) var<storage,read> col: vec4f;
 
 struct VOut {
     @builtin(position) pos: vec4f,
@@ -24,5 +24,5 @@ fn fragmentMain(v: VOut) -> @location(0) vec4f {
     let r = makeColor(v.color[0]);
     let g = makeColor(v.color[1]);
     let b = makeColor(v.color[2]);
-    return vec4f(r,g,b,v.color[3]); // (R, G, B, A)
+    return vec4f(0.5,0.5,0.5,1); // (R, G, B, A)
 }
