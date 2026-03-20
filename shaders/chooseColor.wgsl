@@ -7,6 +7,6 @@ fn vertexMain(@location(0) pos: vec2f) -> @builtin(position) vec4f {
 }
 
 @fragment // this compute the color of each pixel
-fn fragmentMain(v: VOut) -> @location(0) vec4f {
+fn fragmentMain() -> @location(0) vec4f {
     return color;
 }
