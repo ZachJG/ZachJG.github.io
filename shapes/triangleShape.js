@@ -29,7 +29,7 @@ export default class TriangleShape extends Standard2DVertexObject {
         this._colorBuffer = this._device.createBuffer({
             label: "Colors " + this.getName(),
             size: this._color.byteLength,
-            usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST,
+            usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
         });
         // Copy from CPU to GPU
         this._device.queue.writeBuffer(this._colorBuffer, 0, this._color);
