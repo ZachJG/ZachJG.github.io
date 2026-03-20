@@ -4,7 +4,10 @@ export default class TriangleShape extends Standard2DVertexObject {
     constructor(device, canvasFormat,vertices,color) {
         super(device, canvasFormat, vertices, '../shaders/chooseColor.wgsl', 'triangle-list');
         this._vertices = vertices;
-        this._color = color;
+        this._color = new Float32Array([
+            color[0]/255, color[1]/255,
+            color[2]/255, color[3]
+        ]);
     }
     async createGeometry() {
         // Create vertex buffer to store the vertices in GPU
