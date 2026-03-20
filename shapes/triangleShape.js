@@ -2,7 +2,7 @@ import Standard2DVertexObject from "../classes/vertexObject2d.js";
 
 export default class TriangleShape extends Standard2DVertexObject {
     constructor(device, canvasFormat,vertices,color) {
-        super(device, canvasFormat, vertices, '../shaders/chooseColor.wgsl', 'triangle-list');
+        super(device, canvasFormat, vertices, '../shaders/chooseColor.wgsl', 'line-strip');
         this._vertices = vertices;
         this._color = new Float32Array([
             color[0]/255, color[1]/255,
