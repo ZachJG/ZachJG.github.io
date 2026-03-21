@@ -61,10 +61,10 @@ async function init() {
     -0.08,-0.04,
     -0.12,0.05,
     -0.12,0.01,
-    -0.1,0.01,
+    -0.08,0.01,
     -0.08,0.01,
     -0.08,0.05,
-    -0.1,0.05
+    -0.12,0.05
   ]);
   let star = new TriangleShape(renderer._device,renderer._canvasFormat,vertSt,color2);
   await renderer.appendSceneObject(star);
