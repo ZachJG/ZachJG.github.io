@@ -1,4 +1,4 @@
-html, body {
+html, body, .container {
     overflow: visible;
     display: flex;
     width: 100%;
