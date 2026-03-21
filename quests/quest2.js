@@ -1,5 +1,5 @@
 import Renderer from "../classes/renderer2d.js";
-import TriangleShape from "../shapes/triangleShape.js";
+import Standard2DFullScreenObject from "../classes/standard2dFullScreenObject.js";
 
 async function init() {
   // Create a canvas tag
@@ -10,6 +10,7 @@ async function init() {
   // Create a simple renderer
   const renderer = new Renderer(canvasTag);
   await renderer.init();
+  await renderer.appendSceneObject(new Standard2DFullScreenObject(renderer._device, renderer._canvasFormat, "space.jpg"));
 
   // Render
   renderer.render();
