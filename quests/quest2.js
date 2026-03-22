@@ -1,5 +1,7 @@
 import Renderer from "../classes/renderer2d.js";
 import Standard2DFullScreenObject from "../classes/standard2dFullScreenObject.js";
+import TriangleShape from "../shapes/triangleShape.js";
+import TrianglePGA from "../shapes/trianglepga.js";
 
 async function init() {
   let bezier = (t) => {
@@ -55,7 +57,13 @@ async function init() {
   const renderer = new Renderer(canvasTag);
   await renderer.init();
   await renderer.appendSceneObject(new Standard2DFullScreenObject(renderer._device, renderer._canvasFormat, "space.jpg"));
-
+  let sunVert = new Float32Array([
+    0,0,0.01,0.01,0.01,-0.01
+  ]);
+  let sunColor = new Float32Array([
+    200,100,100,1
+  ]);
+  let sun = new TriangleShape(renderer._device,renderer._canvasFormat,sunVert,sunColor);
   // Render
   renderer.render();
   return renderer;

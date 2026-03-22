@@ -36,7 +36,7 @@ export default class TrianglePGA extends Standard2DGAPosedVertexObject {
         super.createRenderPipeline();
         // Creata a bind group to pass the pose buffer into @group(0) @binding(0)
         this._bindGroup = this._device.createBindGroup({
-            label: "Render Bind Group " + this.getName(),
+            label: "Triangle Bind Group " + this.getName(),
             layout: this._renderPipeline.getBindGroupLayout(0),
             entries: [
                 {
