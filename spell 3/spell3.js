@@ -1,7 +1,7 @@
 import FilteredRenderer from "../classes/filteredRenderer.js";
 import Standard2DFullScreenObject from "../classes/standard2dFullScreenObject.js";
 import ImageNosifyFilterObject from "../classes/imageNosify.js";
-import Standard2DGAPosedVertexObject from "../classes/standard2dPose.js"
+import Standard2DGAPosedVertexObject from "../classes/standard2dPose.js";
 
 function LinearInterpolate(A, B, t) {
   return A * (1 - t) + B * t;
