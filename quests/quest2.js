@@ -58,10 +58,10 @@ async function init() {
   await renderer.init();
   await renderer.appendSceneObject(new Standard2DFullScreenObject(renderer._device, renderer._canvasFormat, "space.jpg"));
   let sunVert = new Float32Array([
-    0,0,0.1,0,0.05,-0.05,
-    0,0,0.1,0,0.05,0.05,
-    0,0,-0.1,0,-0.05,-0.05,
-    0,0,-0.1,0,-0.05,0.05
+    0,0,0.1,0,0.075,-0.05,
+    0,0,0.1,0,0.075,0.05,
+    0,0,-0.1,0,-0.075,-0.05,
+    0,0,-0.1,0,-0.075,0.05
   ]);
   let sunColor = new Float32Array([
     255,255,0,1
