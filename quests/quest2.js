@@ -64,6 +64,7 @@ async function init() {
     200,100,100,1
   ]);
   let sun = new TriangleShape(renderer._device,renderer._canvasFormat,sunVert,sunColor);
+  await renderer.appendSceneObject(sun);
   // Render
   renderer.render();
   return renderer;
