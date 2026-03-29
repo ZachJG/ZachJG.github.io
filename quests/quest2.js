@@ -57,7 +57,7 @@ async function init() {
   const renderer = new Renderer(canvasTag);
   await renderer.init();
   await renderer.appendSceneObject(new Standard2DFullScreenObject(renderer._device, renderer._canvasFormat, "space.jpg"));
-  let sunVert = new Float32Array([
+  let orbVert = new Float32Array([
     0,0,0.1,0,0.075,-0.05,
     0,0,0.1,0,0.075,0.05,
     0,0,-0.1,0,-0.075,-0.05,
@@ -74,7 +74,7 @@ async function init() {
   let sunColor = new Float32Array([
     255,255,0,1
   ]);
-  let sun = new TriangleShape(renderer._device,renderer._canvasFormat,sunVert,sunColor);
+  let sun = new TriangleShape(renderer._device,renderer._canvasFormat,orbVert,sunColor);
   await renderer.appendSceneObject(sun);
   // Render
   renderer.render();
