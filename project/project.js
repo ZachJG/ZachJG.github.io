@@ -59,7 +59,9 @@ async function init() {
   const renderer = new Renderer(canvasTag);
   await renderer.init();
   let vert = new Float32Array([
-    0,0.1,-0.1,0,0.1,0
+    0, 0.25, 
+    -0.25, 0,
+    0.25,  0,
   ]);
   let col = new Float32Array([
     100,200,50,1
