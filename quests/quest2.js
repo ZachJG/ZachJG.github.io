@@ -77,7 +77,21 @@ async function init() {
   let sun = new TriangleShape(renderer._device,renderer._canvasFormat,orbVert,sunColor);
   await renderer.appendSceneObject(sun);
   // Render
-  renderer.render();
+  let timerMs = 100;
+  let steps = 100;      // how many samples for a full move
+  let i = 0;
+  let dir = 1;
+
+  setInterval(() => {
+    let t = i / steps;
+    renderer.render();
+
+    let tNew = parametricEase(t,3);
+
+    i += dir;
+    if (i >= steps) dir = -1;
+    if (i <= 0) dir = 1;
+  }, timerMs);
   return renderer;
 }
 
