@@ -80,7 +80,10 @@ async function init() {
     renderer.render();
 
     let tNew = parametricEase(t,3);
-
+    pose[0] = LinearInterpolate(pose0[0], pose1[0], tNew);
+    pose[1] = LinearInterpolate(pose0[1], pose1[1], tNew);
+    pose[2] = LinearInterpolate(pose0[2], pose1[2], tNew);
+    pose[3] = LinearInterpolate(pose0[3], pose1[3], tNew);
     i += dir;
     if (i >= steps) dir = -1;
     if (i <= 0) dir = 1;
