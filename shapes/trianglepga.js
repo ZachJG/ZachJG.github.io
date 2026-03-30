@@ -23,13 +23,13 @@ export default class TrianglePGA extends Standard2DGAPosedVertexObject {
             size: this._color.byteLength,
             usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
         });
+        this._device.queue.writeBuffer(this._colorBuffer, 0, this._color);
         // Initial update of the geomtery - in this case only the pose
         this.updateGeometry();
     }
     updateGeometry() {
         // Copy from pose from CPU to GPU
         this._device.queue.writeBuffer(this._poseBuffer, 0, this._pose);
-        this._device.queue.writeBuffer(this._colorBuffer, 0, this._color);
     }
     async createRenderPipeline() {
         // Call parent's to create render pipeline
