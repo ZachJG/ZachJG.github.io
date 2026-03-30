@@ -13,6 +13,7 @@ struct Pose {
 };
 
 @group(0) @binding(0) var<uniform> pose: Pose; // a uniform buffer describing the object pose
+@group(0) @binding(1) var<uniform> color: vec4f;
 
 fn geometricProduct(a: MultiVector, b: MultiVector) -> MultiVector {
     // Note, both points and motors are using scalar (1), exey, eoex, eoey
@@ -79,8 +80,6 @@ fn vertexMain(@location(0) pos: vec2f) -> @builtin(position) vec4f {
     let scaled = transformed * pose.scale;
     return vec4f(scaled, 0, 1); // (pos, Z, W) = (X, Y, Z, W)
 }
-
-@group(0) @binding(1) var<uniform> color: vec4f;
 
 @fragment // this compute the color of each pixel
 fn fragmentMain() -> @location(0) vec4f {
