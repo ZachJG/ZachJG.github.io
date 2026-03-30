@@ -70,6 +70,7 @@ async function init() {
   let pose1 = normalizeMotor([0, 1, -0.25, 0.4]);
   var pose = new Float32Array([pose0[0], pose0[1], pose0[2], pose0[3], 1, 1]);
   let t = new TrianglePGA(renderer._device,renderer._canvasFormat,vert,pose,col);
+  await renderer.appendSceneObject(t);
   
   // Render
   let timerMs = 100;
