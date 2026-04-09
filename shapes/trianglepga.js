@@ -2,7 +2,7 @@ import Standard2DGAPosedVertexObject from "../classes/standard2dPose.js";
 
 export default class TrianglePGA extends Standard2DGAPosedVertexObject {
     constructor(device, canvasFormat, vertices, pose,color) {
-        super(device, canvasFormat, vertices, '../shaders/chooseColorPGA.wgsl', 'triangle-list');
+        super(device, canvasFormat, vertices,pose,'../shaders/chooseColorPGA.wgsl', 'triangle-list');
         this._pose = pose;
         this._color = new Float32Array([
             color[0]/255,color[1]/255,color[2]/255,color[3]
