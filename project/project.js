@@ -1,5 +1,5 @@
 import TrianglePGA from "../shapes/trianglepga.js";
-import FilteredRenderer from "..classes/filteredRenderer.js";
+import Renderer from "../classes/renderer2d.js";
 
 function LinearInterpolate(A, B, t) {
   return A * (1 - t) + B * t;
@@ -56,7 +56,7 @@ async function init() {
   document.body.appendChild(canvasTag);
 
   // Create a simple renderer
-  const renderer = new FilteredRenderer(canvasTag);
+  const renderer = new Renderer(canvasTag);
   await renderer.init();
   let vert = new Float32Array([
     0, 0.25, 
