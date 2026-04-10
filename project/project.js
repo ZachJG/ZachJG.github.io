@@ -59,15 +59,15 @@ async function init() {
   const renderer = new Renderer(canvasTag);
   await renderer.init();
   let vert = new Float32Array([
-    0, 0.25, 
-    -0.25, 0,
-    0.25,  0,
+    0, 0.025, 
+    -0.025, 0,
+    0.025,  0,
   ]);
   let col = new Float32Array([
     100,200,50,1
   ]);
   let pose0 = normalizeMotor([1, 0, -0.2, -0.25]);
-  let pose1 = normalizeMotor([1, 0, -0.2, 0.25]);
+  let pose1 = normalizeMotor([0, 0, -0.2, -0.25]);
   var pose = new Float32Array([pose0[0], pose0[1], pose0[2], pose0[3], 1, 1]);
   let t = new TrianglePGA(renderer._device,renderer._canvasFormat,vert,pose,col);
   await renderer.appendSceneObject(t);
