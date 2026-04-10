@@ -44,6 +44,12 @@ async function init() {
     if (mnorm == 0.0) {
       return [1, 0, 0, 0];
     }
+    /*
+      0 - ???
+      1 - ???
+      2 - x
+      3 - y
+    */
     return [m[0] / mnorm, m[1] / mnorm, m[2] / mnorm, m[3] / mnorm];
   };
   let easeInEaseOut = (t) => {
@@ -67,7 +73,7 @@ async function init() {
     100,200,50,1
   ]);
   let pose0 = normalizeMotor([1, 0, -0.2, -0.25]);
-  let pose1 = normalizeMotor([0, 0, -0.2, -0.25]);
+  let pose1 = normalizeMotor([1, 1, -0.2, -0.25]);
   var pose = new Float32Array([pose0[0], pose0[1], pose0[2], pose0[3], 1, 1]);
   let t = new TrianglePGA(renderer._device,renderer._canvasFormat,vert,pose,col);
   await renderer.appendSceneObject(t);
