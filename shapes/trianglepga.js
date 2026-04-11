@@ -1,4 +1,5 @@
 import Standard2DGAPosedVertexObject from "../classes/standard2dPose.js";
+import PGA2D from "../classes/pga2d.js";
 
 export default class TrianglePGA extends Standard2DGAPosedVertexObject {
     constructor(device, canvasFormat, vertices, pose,color) {
@@ -7,6 +8,31 @@ export default class TrianglePGA extends Standard2DGAPosedVertexObject {
         this._color = new Float32Array([
             color[0]/255,color[1]/255,color[2]/255,color[3]
         ]);
+    }
+    updatePose(newpose){
+        for (let i = 0; i < 4; ++i) {
+            this._pose[i] = newpose[i];
+        }
+    }
+    moveLeft(d) {
+        let dt = PGA2D.createTranslator(-d, 0);
+        let newpose = PGA2D.normalizeMotor(PGA2D.geometricProduct(dt, [this._pose[0], this._pose[1], this._pose[2], this._pose[3]]));
+        this.updatePose(newpose);
+    }
+    moveRight(d) {
+        let dt = PGA2D.createTranslator(d, 0);
+        let newpose = PGA2D.normalizeMotor(PGA2D.geometricProduct(dt, [this._pose[0], this._pose[1], this._pose[2], this._pose[3]]));
+        this.updatePose(newpose);
+    }
+    moveUp(d) {
+        let dt = PGA2D.createTranslator(0, d);
+        let newpose = PGA2D.normalizeMotor(PGA2D.geometricProduct(dt, [this._pose[0], this._pose[1], this._pose[2], this._pose[3]]));
+        this.updatePose(newpose);
+    }
+    moveDown(d) {
+        let dt = PGA2D.createTranslator(0, -d);
+        let newpose = PGA2D.normalizeMotor(PGA2D.geometricProduct(dt, [this._pose[0], this._pose[1], this._pose[2], this._pose[3]]));
+        this.updatePose(newpose);
     }
     // More methods to implement
     async createGeometry() {

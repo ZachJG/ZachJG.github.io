@@ -1,61 +1,8 @@
 import TrianglePGA from "../shapes/trianglepga.js";
 import Renderer from "../classes/renderer2d.js";
-
-function LinearInterpolate(A, B, t) {
-  return A * (1 - t) + B * t;
-}
+import PGA2D from "../classes/pga2d.js";
 
 async function init() {
-  let bezier = (t) => {
-    let p1 = 0;
-    let p2 = 1;
-    let p3 = 0;
-    let p4 = 1;
-    return Math.pow(1 - t, 3) * p1 + 3 * Math.pow(1 - t, 2) * t * p2 + 3 * (1 - t) * Math.pow(t, 2) * p3 + Math.pow(t, 3) * p4;
-  }
-  let parametricEase = (t, alpha) => {
-    let a = Math.pow(t, alpha);
-    let b = Math.pow(1 - t, alpha);
-    return a / (a + b);
-  };
-  let geometricProduct = (a, b) => {
-    // ref: https://geometricalgebratutorial.com/pga/
-    // eoo = 0, e00 = 1 e11 = 1
-    // s + e01 + eo0 + eo1
-    // ss   = s   , se01   = e01  , seo0            = eo0  , seo1          = eo1
-    // e01s = e01 , e01e01 = -s   , e01eo0 = e10e0o = -eo1 , e01eo1 = -e0o = eo0
-    // eo0s = eo0 , eo0e01 = eo1  , eo0eo0          = 0    , eo0eo1        = 0
-    // e01s = e01 , eo1e01 = -eo0 , eo1eo0          = 0    , eo1eo1        = 0
-    return [
-      a[0] * b[0] - a[1] * b[1] , // scalar
-      a[0] * b[1] + a[1] * b[0] , // e01
-      a[0] * b[2] + a[1] * b[3] + a[2] * b[0] - a[3] * b[1], // eo0
-      a[0] * b[3] - a[1] * b[2] + a[2] * b[1] + a[3] * b[0]  // eo1
-    ];
-  };
-  let reverse = (a) => {
-    return [ a[0], -a[1], -a[2], -a[3] ];
-  };
-  let motorNorm =  (m) => {
-    return Math.sqrt(m[0] * m[0] + m[1] * m[1] + m[2] * m[2] + m[3] * m[3]);
-  };
-  let normalizeMotor = (m) => {
-    let mnorm = motorNorm(m);
-    if (mnorm == 0.0) {
-      return [1, 0, 0, 0];
-    }
-    /*
-      0 - ???
-      1 - ???
-      2 - x
-      3 - y
-    */
-    return [m[0] / mnorm, m[1] / mnorm, m[2] / mnorm, m[3] / mnorm];
-  };
-  let easeInEaseOut = (t) => {
-    if (t > 0.5) return t * (4 - 2 * t) -1;
-    else return 2 * t * t;
-  }
   // Create a canvas tag
   const canvasTag = document.createElement('canvas');
   canvasTag.id = "renderCanvas";
@@ -72,31 +19,47 @@ async function init() {
   let col = new Float32Array([
     100,200,50,1
   ]);
-  let pose0 = normalizeMotor([1, 0, -0.2, -0.25]);
-  let pose1 = normalizeMotor([1, 1, -0.2, -0.25]);
-  var pose = new Float32Array([pose0[0], pose0[1], pose0[2], pose0[3], 1, 1]);
-  let t = new TrianglePGA(renderer._device,renderer._canvasFormat,vert,pose,col);
-  await renderer.appendSceneObject(t);
+  var speed = 0.01
+  var pose = new Float32Array([1, 0, 0, 0, 1, 1]);
+  let player = new TrianglePGA(renderer._device,renderer._canvasFormat,vert,pose,col);
+  await renderer.appendSceneObject(player);
   
-  // Render
-  let timerMs = 100;
-  let steps = 100;      // how many samples for a full move
-  let i = 0;
-  let dir = 1;
-
-  setInterval(() => {
-    let t = i / steps;
-    renderer.render();
-
-    let tNew = parametricEase(t,3);
-    pose[0] = LinearInterpolate(pose0[0], pose1[0], tNew);
-    pose[1] = LinearInterpolate(pose0[1], pose1[1], tNew);
-    pose[2] = LinearInterpolate(pose0[2], pose1[2], tNew);
-    pose[3] = LinearInterpolate(pose0[3], pose1[3], tNew);
-    i += dir;
-    if (i >= steps) dir = -1;
-    if (i <= 0) dir = 1;
-  }, timerMs);
+  window.addEventListener("keydown", (e) => {
+    switch (e.key) {
+      case 'ArrowUp': case 'w': case 'W':
+        player.moveUp(speed);
+        break;
+      case 'ArrowDown': case 's': case 'S':  
+        player.moveDown(speed);
+        break;
+      case 'ArrowLeft': case 'a': case 'A':
+        player.moveLeft(speed);
+        break;
+      case 'ArrowRight': case 'd': case 'D':
+        player.moveRight(speed);
+        break;
+    }
+  });
+  var frameCnt = 0;
+  var tgtFPS = 60;
+  var secPerFrame = 1. / tgtFPS;
+  var frameInterval = secPerFrame * 1000;
+  var lastCalled;
+  let renderFrame = () => {
+    let elapsed = Date.now() - lastCalled;
+    if (elapsed > frameInterval) {
+      ++frameCnt;
+      lastCalled = Date.now() - (elapsed % frameInterval);
+      renderer.render();
+    }
+    requestAnimationFrame(renderFrame);
+  };
+  lastCalled = Date.now();
+  renderFrame();
+  setInterval(() => { 
+    console.log(frameCnt);
+    frameCnt = 0;
+  }, 1000); // call every 1000 ms
   return renderer;
 }
 
