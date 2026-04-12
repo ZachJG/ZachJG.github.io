@@ -27,22 +27,22 @@ async function init() {
   window.addEventListener("keydown", (e) => {
     switch (e.key) {
       case 'ArrowUp': case 'w': case 'W':
-        if (pose[3] < 1) {
+        if (player._pose[3] < 1) {
           player.moveUp(speed);
         }
         break;
       case 'ArrowDown': case 's': case 'S':  
-        if (pose[3] > -1) {
+        if (player._pose[3] > -1) {
           player.moveDown(speed);
         }
         break;
       case 'ArrowLeft': case 'a': case 'A':
-        if (pose[2] > -1) {
+        if (player._pose[2] > -1) {
           player.moveLeft(speed);
         }
         break;
       case 'ArrowRight': case 'd': case 'D':
-        if (pose[2] < 1) {
+        if (player._pose[2] < 1) {
           player.moveRight(speed);
         }
         break;
