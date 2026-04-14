@@ -4,6 +4,7 @@ import PGA2D from "../classes/pga2d.js";
 export default class TrianglePGA extends Standard2DGAPosedVertexObject {
     constructor(device, canvasFormat, vertices, pose,color) {
         super(device, canvasFormat, vertices,pose,'../shaders/chooseColorPGA.wgsl', 'triangle-list');
+        this._shape = vertices;
         this._pose = pose;
         this._color = new Float32Array([
             color[0]/255,color[1]/255,color[2]/255,color[3]

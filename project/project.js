@@ -27,24 +27,28 @@ async function init() {
   window.addEventListener("keydown", (e) => {
     switch (e.key) {
       case 'ArrowUp': case 'w': case 'W':
-        if (player._pose[3] < 0.75) {
-          player.moveUp(speed);
-        }
+        player.moveUp(speed);
         break;
       case 'ArrowDown': case 's': case 'S':  
-        if (player._pose[3] > -0.75) {
-          player.moveDown(speed);
-        }
+        player.moveDown(speed);
         break;
       case 'ArrowLeft': case 'a': case 'A':
-        if (player._pose[2] > -0.75) {
-          player.moveLeft(speed);
-        }
+        player.moveLeft(speed);
         break;
       case 'ArrowRight': case 'd': case 'D':
-        if (player._pose[2] < 0.75) {
-          player.moveRight(speed);
-        }
+        player.moveRight(speed);
+        break;
+    }
+  });
+  window.addEventListener("keyup", (e) => {
+    switch (e.key) {
+      case 'ArrowUp': case 'w': case 'W': case 'ArrowDown': case 's': case 'S': case 'ArrowLeft': case 'a': case 'A': case 'ArrowRight': case 'd': case 'D':
+        console.log(player._pose[2]+vert[0]);
+        console.log(player._pose[2]+vert[2]);
+        console.log(player._pose[2]+vert[4]);
+        console.log(player._pose[3]+vert[1]);
+        console.log(player._pose[3]+vert[3]);
+        console.log(player._pose[3]+vert[5]);
         break;
     }
   });
@@ -64,8 +68,7 @@ async function init() {
   };
   lastCalled = Date.now();
   renderFrame();
-  setInterval(() => { 
-    console.log(frameCnt);
+  setInterval(() => {
     frameCnt = 0;
   }, 1000); // call every 1000 ms
   return renderer;
