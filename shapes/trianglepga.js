@@ -14,6 +14,13 @@ export default class TrianglePGA extends Standard2DGAPosedVertexObject {
         for (let i = 0; i < 4; ++i) {
             this._pose[i] = newpose[i];
         }
+        for (let i = 0; i < this._shape.size; ++i) {
+            if (i % 2 == 0) {
+                this._shape[i] = this._shape[i] + this._pose[2];
+            } else {
+                this._shape[i] = this._shape[i] + this._pose[3];
+            }
+        }
     }
     moveLeft(d) {
         let dt = PGA2D.createTranslator(-d, 0);

@@ -14,7 +14,7 @@ async function init() {
   let vert = new Float32Array([
     0, 0.025, 
     -0.025, 0,
-    0.025,  0,
+    0.025,  0
   ]);
   let col = new Float32Array([
     100,200,50,1
@@ -40,7 +40,7 @@ async function init() {
         break;
     }
   });
-  window.addEventListener("keyup", (e) => {
+  /*window.addEventListener("keyup", (e) => {
     switch (e.key) {
       case 'ArrowUp': case 'w': case 'W': case 'ArrowDown': case 's': case 'S': case 'ArrowLeft': case 'a': case 'A': case 'ArrowRight': case 'd': case 'D':
         console.log(player._pose[2]+vert[0]);
@@ -51,7 +51,7 @@ async function init() {
         console.log(player._pose[3]+vert[5]);
         break;
     }
-  });
+  });*/
   var frameCnt = 0;
   var tgtFPS = 60;
   var secPerFrame = 1. / tgtFPS;
