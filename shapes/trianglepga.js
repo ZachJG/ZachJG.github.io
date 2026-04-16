@@ -2,26 +2,33 @@ import Standard2DGAPosedVertexObject from "../classes/standard2dPose.js";
 import PGA2D from "../classes/pga2d.js";
 
 export default class TrianglePGA extends Standard2DGAPosedVertexObject {
-    constructor(device, canvasFormat, vertices, pose,color) {
+    constructor(device, canvasFormat, vertices, pose,color,shape) {
         super(device, canvasFormat, vertices,pose,'../shaders/chooseColorPGA.wgsl', 'triangle-list');
-        this._baseVertices = vertices;
-        this._shape = vertices;
         this._pose = pose;
         this._color = new Float32Array([
             color[0]/255,color[1]/255,color[2]/255,color[3]
         ]);
+        // 0 = x, 1 = y, 2 = width, 3 = height
+        this.shape = shape;
+        this._collision = new Float32Array([
+            shape[0] + pose[2],
+            shape[1] + pose[3],
+            shape[2], shape[3]
+        ]);
     }
+    isColliding(a, b) {
+        return (a[0] < b[0] + b[2] &&
+            a[0] + a[2] > b[0] &&
+            a[1] < b[1] + b[3] &&
+            a[1] + a[3] > b[1]);
+    }
+
     updatePose(newpose){
         for (let i = 0; i < 4; ++i) {
             this._pose[i] = newpose[i];
         }
-        for (let i = 0; i < this._shape.size; ++i) {
-            if (i % 2 == 0) {
-                this._shape[i] = this._baseVertices[i] + this._pose[2];
-            } else {
-                this._shape[i] = this._baseVertices[i] + this._pose[3];
-            }
-        }
+        this._collision[0] = this._shape + this._pose[2];
+        this._collision[1] = this._shape + this._pose[3];
     }
     moveLeft(d) {
         let dt = PGA2D.createTranslator(-d, 0);

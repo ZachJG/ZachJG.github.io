@@ -19,9 +19,12 @@ async function init() {
   let col = new Float32Array([
     100,200,50,1
   ]);
+  let shap = new Float32Array([
+    -0.025,-0.025,0.05,0.05
+  ]);
   var speed = 0.01
   var pose = new Float32Array([1, 0, 0, 0, 1, 1]);
-  let player = new TrianglePGA(renderer._device,renderer._canvasFormat,vert,pose,col);
+  let player = new TrianglePGA(renderer._device,renderer._canvasFormat,vert,pose,col,shap);
   await renderer.appendSceneObject(player);
   
   window.addEventListener("keydown", (e) => {
