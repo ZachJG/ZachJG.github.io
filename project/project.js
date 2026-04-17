@@ -27,6 +27,23 @@ async function init() {
   let player = new TrianglePGA(renderer._device,renderer._canvasFormat,vert,pose,col,shap);
   await renderer.appendSceneObject(player);
   
+  let npc1 = new TrianglePGA(
+    renderer._device,
+    renderer._canvasFormat,
+    new Float32Array([
+      0,0.05,-0.05,0,0.05,0
+    ]),
+    new Float32Array([
+      1, 0, 0.5, 0.5, 1, 1
+    ]),
+    new Float32Array([
+      255,0,0,1
+    ]),
+    new Float32Array([
+      -0.05,-0.05,0.075,0.075
+    ])
+  );
+  
   window.addEventListener("keydown", (e) => {
     switch (e.key) {
       case 'ArrowUp': case 'w': case 'W':
@@ -40,6 +57,11 @@ async function init() {
         break;
       case 'ArrowRight': case 'd': case 'D':
         player.moveRight(speed);
+        break;
+      case 'e': case 'E':
+        if (player._collision,npc1._collision) {
+          print("touch")
+        }
         break;
     }
   });
