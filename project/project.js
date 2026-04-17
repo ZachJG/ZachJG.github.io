@@ -60,7 +60,7 @@ async function init() {
         break;
       case 'e': case 'E':
         if (player._collision,npc1._collision) {
-          print("touch")
+          console.log("touch")
         }
         break;
     }
