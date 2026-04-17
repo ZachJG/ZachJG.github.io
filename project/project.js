@@ -43,6 +43,7 @@ async function init() {
       -0.05,-0.05,0.075,0.075
     ])
   );
+  await renderer.appendSceneObject(npc1);
   
   window.addEventListener("keydown", (e) => {
     switch (e.key) {
