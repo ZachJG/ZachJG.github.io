@@ -34,7 +34,7 @@ async function init() {
       0,0.05,-0.05,0,0.05,0
     ]),
     new Float32Array([
-      1, 0, 0.5, 0.5, 1, 1
+      1, 0, 0.25, 0.25, 1, 1
     ]),
     new Float32Array([
       255,0,0,1
