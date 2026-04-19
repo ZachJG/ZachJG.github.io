@@ -1,6 +1,7 @@
 import TrianglePGA from "../shapes/trianglepga.js";
 import Renderer from "../classes/renderer2d.js";
 import PGA2D from "../classes/pga2d.js";
+import StandardTextObject from "../classes/textObject.js";
 
 async function init() {
   // Create a canvas tag
@@ -43,7 +44,58 @@ async function init() {
       -0.05,-0.05,0.075,0.075
     ])
   );
+  let npc2 = new TrianglePGA(
+    renderer._device,
+    renderer._canvasFormat,
+    new Float32Array([
+      0,0.05,-0.05,0,0.05,0
+    ]),
+    new Float32Array([
+      1, 0, -0.25, 0.25, 1, 1
+    ]),
+    new Float32Array([
+      255,0,0,1
+    ]),
+    new Float32Array([
+      -0.05,-0.05,0.075,0.075
+    ])
+  );
+  let npc3 = new TrianglePGA(
+    renderer._device,
+    renderer._canvasFormat,
+    new Float32Array([
+      0,0.05,-0.05,0,0.05,0
+    ]),
+    new Float32Array([
+      1, 0, 0.25, -0.25, 1, 1
+    ]),
+    new Float32Array([
+      255,0,0,1
+    ]),
+    new Float32Array([
+      -0.05,-0.05,0.075,0.075
+    ])
+  );
+  let npc4 = new TrianglePGA(
+    renderer._device,
+    renderer._canvasFormat,
+    new Float32Array([
+      0,0.05,-0.05,0,0.05,0
+    ]),
+    new Float32Array([
+      1, 0, -0.25, -0.25, 1, 1
+    ]),
+    new Float32Array([
+      255,0,0,1
+    ]),
+    new Float32Array([
+      -0.05,-0.05,0.075,0.075
+    ])
+  );
   await renderer.appendSceneObject(npc1);
+  await renderer.appendSceneObject(npc2);
+  await renderer.appendSceneObject(npc3);
+  await renderer.appendSceneObject(npc4);
   
   window.addEventListener("keydown", (e) => {
     switch (e.key) {
@@ -80,7 +132,7 @@ async function init() {
   });*/
   var frameCnt = 0;
   var tgtFPS = 60;
-  var secPerFrame = 1. / tgtFPS;
+  var secPerFrame = 1 / tgtFPS;
   var frameInterval = secPerFrame * 1000;
   var lastCalled;
   let renderFrame = () => {
