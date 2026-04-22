@@ -96,6 +96,10 @@ async function init() {
   await renderer.appendSceneObject(npc2);
   await renderer.appendSceneObject(npc3);
   await renderer.appendSceneObject(npc4);
+  let npc1Text = new StandardTextObject('I like to wear shorts. They are comfy.');
+  let npc2Text = new StandardTextObject('Hello.');
+  let npc3Text = new StandardTextObject('Welcome to Triangle Town.');
+  let npc4Text = new StandardTextObject('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
   
   window.addEventListener("keydown", (e) => {
     switch (e.key) {
