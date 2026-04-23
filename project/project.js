@@ -100,24 +100,50 @@ async function init() {
   let npc2Text = new StandardTextObject('Hello.');
   let npc3Text = new StandardTextObject('Welcome to Triangle Town.');
   let npc4Text = new StandardTextObject('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+  npc1Text.toggleVisibility();
+  npc2Text.toggleVisibility();
+  npc3Text.toggleVisibility();
+  npc4Text.toggleVisibility();
+  var talking = false;
   
   window.addEventListener("keydown", (e) => {
     switch (e.key) {
       case 'ArrowUp': case 'w': case 'W':
-        player.moveUp(speed);
+        if (!talking) {
+          player.moveUp(speed);
+        }
         break;
       case 'ArrowDown': case 's': case 'S':  
-        player.moveDown(speed);
+        if (!talking) {
+          player.moveDown(speed);
+        }
         break;
       case 'ArrowLeft': case 'a': case 'A':
-        player.moveLeft(speed);
+        if (!talking) {
+          player.moveLeft(speed);
+        }
         break;
       case 'ArrowRight': case 'd': case 'D':
-        player.moveRight(speed);
+        if (!talking) {
+          player.moveRight(speed);
+        }
         break;
       case 'e': case 'E':
         if (player._collision,npc1._collision) {
-          console.log("touch")
+          npc1Text.toggleVisibility();
+          talking = !talking;
+        }
+        if (player._collision,npc2._collision) {
+          npc2Text.toggleVisibility();
+          talking = !talking;
+        }
+        if (player._collision,npc3._collision) {
+          npc3Text.toggleVisibility();
+          talking = !talking;
+        }
+        if (player._collision,npc4._collision) {
+          npc4Text.toggleVisibility();
+          talking = !talking;
         }
         break;
     }
