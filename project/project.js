@@ -96,14 +96,7 @@ async function init() {
   await renderer.appendSceneObject(npc2);
   await renderer.appendSceneObject(npc3);
   await renderer.appendSceneObject(npc4);
-  let npc1Text = new StandardTextObject('I like to wear shorts. They are comfy.');
-  let npc2Text = new StandardTextObject('Hello.');
-  let npc3Text = new StandardTextObject('Welcome to Triangle Town.');
-  let npc4Text = new StandardTextObject('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-  npc1Text.toggleVisibility();
-  npc2Text.toggleVisibility();
-  npc3Text.toggleVisibility();
-  npc4Text.toggleVisibility();
+  let dialogue = new StandardTextObject('');
   var talking = false;
   
   window.addEventListener("keydown", (e) => {
@@ -130,19 +123,19 @@ async function init() {
         break;
       case 'e': case 'E':
         if (player._collision,npc1._collision) {
-          npc1Text.toggleVisibility();
+          dialogue.updateText('I like to wear shorts. They are comfy.');
           talking = !talking;
         }
         if (player._collision,npc2._collision) {
-          npc2Text.toggleVisibility();
+          dialogue.updateText('Welcome to Triangle Town.');
           talking = !talking;
         }
         if (player._collision,npc3._collision) {
-          npc3Text.toggleVisibility();
+          dialogue.updateText('Do not follow your dreams, find something to get comfortable in.');
           talking = !talking;
         }
         if (player._collision,npc4._collision) {
-          npc4Text.toggleVisibility();
+          dialogue.updateText('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
           talking = !talking;
         }
         break;
