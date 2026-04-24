@@ -123,20 +123,44 @@ async function init() {
         break;
       case 'e': case 'E':
         if (player._collision,npc1._collision) {
-          dialogue.updateText('I like to wear shorts. They are comfy.');
           talking = !talking;
+          if (talking) {
+            dialogue.updateText('I like to wear shorts. They are comfy.');
+            dialogue.updateTextRegion('I like to wear shorts. They are comfy.');
+          } else {
+            dialogue.updateText('');
+            dialogue.updateTextRegion('');
+          }
         }
         if (player._collision,npc2._collision) {
-          dialogue.updateText('Welcome to Triangle Town.');
           talking = !talking;
+          if (talking) {
+            dialogue.updateText('Welcome to Triangle Town.');
+            dialogue.updateTextRegion('Welcome to Triangle Town.');
+          } else {
+            dialogue.updateText('');
+            dialogue.updateTextRegion('');
+          }
         }
         if (player._collision,npc3._collision) {
-          dialogue.updateText('Do not follow your dreams, find something to get comfortable in.');
           talking = !talking;
+          if (talking) {
+            dialogue.updateText('Do not follow your dreams, find something to get comfortable in.');
+            dialogue.updateTextRegion('Do not follow your dreams, find something to get comfortable in.');
+          } else {
+            dialogue.updateText('');
+            dialogue.updateTextRegion('');
+          }
         }
         if (player._collision,npc4._collision) {
-          dialogue.updateText('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
           talking = !talking;
+          if (talking) {
+            dialogue.updateText('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+            dialogue.updateTextRegion('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+          } else {
+            dialogue.updateText('');
+            dialogue.updateTextRegion('');
+          }
         }
         break;
     }
